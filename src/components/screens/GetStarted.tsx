@@ -4,7 +4,7 @@ export function GetStarted() {
   const { setAppState } = useStudyMaxer();
 
   return (
-    <div className="h-full bg-[#0a1628] flex flex-col items-center justify-between px-6 py-12">
+    <div className="h-screen bg-[#0a1628] flex flex-col items-center justify-between px-6 py-12">
       <div className="flex-1 flex flex-col items-center justify-center max-w-md w-full">
         <div className="w-full aspect-square mb-8 rounded-2xl overflow-hidden">
           <img 

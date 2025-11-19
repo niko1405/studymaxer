@@ -1,100 +1,15 @@
 import { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { Code, Palette, Beaker, Heart, Briefcase, Leaf, Dumbbell, Music, BookOpen, Landmark } from 'lucide-react';
 
-interface OnboardingQuestionsProps {
-  onComplete: (data: any) => void;
-}
+import { questions } from '../../config/mock';
+import useStudyMaxer from '../hooks/useStudyMaxer';
 
-const questions = [
-  {
-    id: 1,
-    title: 'Your Interests',
-    question: 'Which topics fascinate you the most?',
-    description: 'Choose up to 5 areas that you are really passionate about. This helps us understand your passions.',
-    type: 'multiple-choice',
-    options: [
-      { id: 'tech', label: 'Technology & IT', icon: Code },
-      { id: 'art', label: 'Art & Design', icon: Palette },
-      { id: 'science', label: 'Science', icon: Beaker },
-      { id: 'health', label: 'Health', icon: Heart },
-      { id: 'social', label: 'Social', icon: Heart },
-      { id: 'business', label: 'Business', icon: Briefcase },
-      { id: 'nature', label: 'Nature', icon: Leaf },
-      { id: 'sports', label: 'Sports', icon: Dumbbell },
-      { id: 'music', label: 'Music', icon: Music },
-      { id: 'history', label: 'History', icon: BookOpen },
-      { id: 'politics', label: 'Politics', icon: Landmark },
-    ],
-    maxSelections: 5,
-  },
-  {
-    id: 2,
-    title: 'Your Strengths',
-    question: 'What are your favorite subjects?',
-    description: 'Select the subjects you enjoy most in school.',
-    type: 'multiple-choice',
-    options: [
-      { id: 'math', label: 'Mathematics', icon: Code },
-      { id: 'physics', label: 'Physics', icon: Beaker },
-      { id: 'chemistry', label: 'Chemistry', icon: Beaker },
-      { id: 'biology', label: 'Biology', icon: Leaf },
-      { id: 'languages', label: 'Languages', icon: BookOpen },
-      { id: 'arts', label: 'Arts', icon: Palette },
-      { id: 'sports', label: 'Sports', icon: Dumbbell },
-      { id: 'music', label: 'Music', icon: Music },
-    ],
-    maxSelections: 5,
-  },
-  {
-    id: 3,
-    title: 'Your Goals',
-    question: 'What are your career goals?',
-    description: 'Tell us about what you want to achieve in your professional life.',
-    type: 'text-input',
-    placeholder: 'e.g., I want to work in technology and help solve real-world problems...',
-  },
-  {
-    id: 4,
-    title: 'Your Hobbies',
-    question: 'What do you enjoy doing in your free time?',
-    description: 'Tell us about your hobbies and activities.',
-    type: 'multiple-choice',
-    options: [
-      { id: 'coding', label: 'Programming', icon: Code },
-      { id: 'gaming', label: 'Gaming', icon: Code },
-      { id: 'reading', label: 'Reading', icon: BookOpen },
-      { id: 'sports-activity', label: 'Sports', icon: Dumbbell },
-      { id: 'music-activity', label: 'Making Music', icon: Music },
-      { id: 'art-activity', label: 'Creating Art', icon: Palette },
-      { id: 'volunteering', label: 'Volunteering', icon: Heart },
-      { id: 'travel', label: 'Traveling', icon: Landmark },
-    ],
-    maxSelections: 5,
-  },
-  {
-    id: 5,
-    title: 'How Others See You',
-    question: 'How would others describe you?',
-    description: 'Select traits that best describe your personality.',
-    type: 'multiple-choice',
-    options: [
-      { id: 'analytical', label: 'Analytical', icon: Code },
-      { id: 'creative', label: 'Creative', icon: Palette },
-      { id: 'helpful', label: 'Helpful', icon: Heart },
-      { id: 'leader', label: 'Leadership', icon: Briefcase },
-      { id: 'curious', label: 'Curious', icon: Beaker },
-      { id: 'organized', label: 'Organized', icon: Briefcase },
-      { id: 'social', label: 'Social', icon: Heart },
-      { id: 'innovative', label: 'Innovative', icon: Code },
-    ],
-    maxSelections: 5,
-  },
-];
 
-export function OnboardingQuestions({ onComplete }: OnboardingQuestionsProps) {
+export function OnboardingQuestions() {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<number, any>>({});
+
+  const { setAppState } = useStudyMaxer();
 
   const currentQuestion = questions[currentStep];
   const currentAnswers = answers[currentQuestion.id] || (currentQuestion.type === 'text-input' ? '' : []);
@@ -122,7 +37,7 @@ export function OnboardingQuestions({ onComplete }: OnboardingQuestionsProps) {
     if (currentStep < questions.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      onComplete(answers);
+      setAppState('main');
     }
   };
 

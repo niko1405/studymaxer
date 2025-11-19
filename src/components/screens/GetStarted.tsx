@@ -1,10 +1,10 @@
-interface GetStartedProps {
-  onGetStarted: () => void;
-}
+import useStudyMaxer from "../hooks/useStudyMaxer";
 
-export function GetStarted({ onGetStarted }: GetStartedProps) {
+export function GetStarted() {
+  const { setAppState } = useStudyMaxer();
+
   return (
-    <div className="min-h-screen bg-[#0a1628] flex flex-col items-center justify-between px-6 py-12">
+    <div className="h-full bg-[#0a1628] flex flex-col items-center justify-between px-6 py-12">
       <div className="flex-1 flex flex-col items-center justify-center max-w-md w-full">
         <div className="w-full aspect-square mb-8 rounded-2xl overflow-hidden">
           <img 
@@ -32,7 +32,7 @@ export function GetStarted({ onGetStarted }: GetStartedProps) {
       
       <div className="w-full max-w-md space-y-4">
         <button
-          onClick={onGetStarted}
+          onClick={() => setAppState('onboarding')}
           className="w-full bg-[#f59e0b] hover:bg-[#d97706] text-white py-4 rounded-full transition-colors flex items-center justify-center"
         >
           Get Started

@@ -1,5 +1,3 @@
-import { ImageWithFallback } from '../ImageWithFallback';
-
 interface GetStartedProps {
   onGetStarted: () => void;
 }

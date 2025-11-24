@@ -298,8 +298,8 @@ export const slides: Slide[] = [
 
 
 export const user = {
-  name: 'Alex',
-  email: 'alex.mueller@email.com',
+  name: 'Lena Hoffmann',
+  email: 'lena.hoffmann@email.com',
   avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
 };
 
@@ -381,3 +381,118 @@ export const nextSteps = [
     color: 'from-rose-500 to-red-500',
   },
 ];
+
+export const mentors = [
+  {
+    id: '1',
+    name: 'Sarah Mueller',
+    role: 'Software Engineer',
+    company: 'Google',
+    field: 'Computer Science',
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
+    online: true,
+    lastMessage: 'Happy to help with your questions!',
+    unread: 2,
+    lastActive: '2m ago',
+    recentlyContacted: true,
+  },
+  {
+    id: '2',
+    name: 'Dr. Michael Schmidt',
+    role: 'Clinical Psychologist',
+    company: 'University Hospital',
+    field: 'Psychology',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop',
+    online: false,
+    lastMessage: 'The studies are very exciting...',
+    unread: 0,
+    lastActive: '1h ago',
+    recentlyContacted: true,
+  },
+  {
+    id: '3',
+    name: 'Lisa Weber',
+    role: 'UX Designer',
+    company: 'BMW',
+    field: 'Design',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop',
+    online: true,
+    lastMessage: 'Creativity is the most important thing!',
+    unread: 1,
+    lastActive: '5m ago',
+    recentlyContacted: true,
+  },
+  {
+    id: '4',
+    name: 'Thomas Becker',
+    role: 'Data Scientist',
+    company: 'Siemens',
+    field: 'Computer Science',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop',
+    online: true,
+    lastMessage: 'Machine Learning is the future',
+    unread: 0,
+    lastActive: '10m ago',
+    recentlyContacted: false,
+  },
+  {
+    id: '5',
+    name: 'Anna Schneider',
+    role: 'Medical Doctor',
+    company: 'Charité Berlin',
+    field: 'Medicine',
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop',
+    online: false,
+    lastMessage: 'Medicine requires dedication',
+    unread: 0,
+    lastActive: '2h ago',
+    recentlyContacted: false,
+  },
+  {
+    id: '6',
+    name: 'Mark Johnson',
+    role: 'Master Carpenter',
+    company: 'Johnson & Sons',
+    field: 'Carpentry',
+    avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop',
+    online: true,
+    lastMessage: 'Craftsmanship is an art',
+    unread: 0,
+    lastActive: '30m ago',
+    recentlyContacted: false,
+  },
+];
+
+export const mockChats: Record<string, Array<{ sender: 'user' | 'mentor'; message: string; time: string }>> = {
+  '1': [
+    { sender: 'mentor', message: 'Hello! Great to see you\'re interested in Computer Science. How can I help you?', time: '10:30' },
+    { sender: 'user', message: 'Hi Sarah! I\'m not sure if Computer Science is right for me. How was your degree?', time: '10:32' },
+    { sender: 'mentor', message: 'The studies were challenging but super exciting! You not only learn to program, but also to think in a problem-solving way.', time: '10:35' },
+    { sender: 'mentor', message: 'What are your biggest concerns?', time: '10:35' },
+    { sender: 'user', message: 'I\'m worried it will be too difficult, especially math...', time: '10:40' },
+    { sender: 'mentor', message: 'Happy to help with your questions!', time: '10:42' },
+  ],
+  '2': [
+    { sender: 'mentor', message: 'Hello! I\'m Dr. Schmidt. Are you interested in Psychology?', time: '14:20' },
+    { sender: 'user', message: 'Yes, very much! How long did your studies take?', time: '14:25' },
+    { sender: 'mentor', message: 'The studies are very exciting...', time: '14:30' },
+  ],
+  '3': [
+    { sender: 'mentor', message: 'Hey! Lisa here. You\'re interested in Design?', time: '09:15' },
+    { sender: 'user', message: 'Yes! How did you end up at BMW?', time: '09:20' },
+    { sender: 'mentor', message: 'Creativity is the most important thing!', time: '09:25' },
+  ],
+  '4': [
+    { sender: 'mentor', message: 'Hello! Thomas here. Data Science is an exciting field!', time: '16:00' },
+    { sender: 'user', message: 'What skills do I need for it?', time: '16:05' },
+    { sender: 'mentor', message: 'Machine Learning is the future', time: '16:10' },
+  ],
+  '5': [
+    { sender: 'mentor', message: 'Hi! I\'m Dr. Schneider. Medicine is a rewarding but demanding path.', time: '11:00' },
+    { sender: 'mentor', message: 'Medicine requires dedication', time: '11:01' },
+  ],
+  '6': [
+    { sender: 'mentor', message: 'Hello! Mark here. Carpentry is both art and skill.', time: '13:00' },
+    { sender: 'mentor', message: 'Craftsmanship is an art', time: '13:01' },
+  ],
+};

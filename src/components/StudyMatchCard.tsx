@@ -85,7 +85,7 @@ const StudyMatchCard = ({ study, onClick, isSaved, onSave, isActive }: StudyMatc
             </div>
             <div className="flex flex-col pr-2">
               <span className="text-[10px] text-gray-300 font-bold uppercase tracking-widest mb-0.5 opacity-80">Match Score</span>
-              <span className="text-3xl font-black leading-none tracking-tight drop-shadow-md" style={{ color: isActive ? study.glowColor : 'white', textShadow: `0 0 20px ${study.glowColor}40` }}>
+              <span className="text-3xl font-black leading-none tracking-tight drop-shadow-md" style={{ color: isActive ? study.glowColor : 'gray', textShadow: `0 0 20px ${study.glowColor}40` }}>
                 {study.match}%
               </span>
             </div>
@@ -101,7 +101,7 @@ const StudyMatchCard = ({ study, onClick, isSaved, onSave, isActive }: StudyMatc
           <span className="inline-block px-3 py-1 bg-white/10 rounded-lg text-xs font-bold text-gray-200 border border-white/10 backdrop-blur-md shadow-sm">
             {study.type}
           </span>
-          <h2 className={`text-3xl sm:text-4xl font-bold leading-[1.1] tracking-tight transition-colors duration-300 drop-shadow-lg ${isActive ? 'text-white' : 'text-gray-400'}`}>
+          <h2 className={`text-3xl sm:text-4xl font-bold leading-[1.1] tracking-tight transition-colors duration-300 drop-shadow-lg ${isActive ? 'text-white' : 'text-gray-600'}`}>
             {study.title}
           </h2>
         </div>

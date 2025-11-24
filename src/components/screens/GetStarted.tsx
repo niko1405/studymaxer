@@ -63,7 +63,7 @@ export default function GetStarted() {
 
   return (
     // h-[100dvh] und flex-col ist wichtig für Mobile Layouts ohne Scroll
-    <div className="h-dvh w-full bg-[#0a1628] flex flex-col items-center overflow-hidden font-sans text-white relative">
+    <div className="h-dvh w-full bg-[#0a1628] flex flex-col items-center overflow-hidden font-sans text-white relative select-none">
 
       {/* Background Ambience */}
       <div className="absolute top-[-20%] right-[-10%] w-[60%] h-[60%] bg-[#f59e0b]/10 blur-[100px] rounded-full pointer-events-none" />

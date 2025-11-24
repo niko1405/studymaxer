@@ -52,7 +52,7 @@ export function OnboardingQuestions() {
     : (currentAnswers as string[]).length > 0;
 
   return (
-    <div className="min-h-screen bg-[#0a1628] text-white px-6 py-8 animate-in fade-in duration-500">
+    <div className="min-h-screen bg-[#0a1628] text-white px-6 py-8 animate-in fade-in duration-500 select-none">
       <div className="max-w-2xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <button

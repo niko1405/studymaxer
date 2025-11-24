@@ -4,7 +4,9 @@ import { Award, Home, User } from "lucide-react";
 
 const Navigation = () => {
     const navigate = useNavigate();
-    const { activeTab } = useStudyMaxer();
+    const { activeTab, showNavigation } = useStudyMaxer();
+
+  if(!showNavigation) return <></>;
 
   return (
     <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-auto pointer-events-none">

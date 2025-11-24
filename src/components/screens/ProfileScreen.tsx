@@ -33,7 +33,11 @@ export function ProfileScreen() {
             </button>
           </div>
           
-          <h1 className="mb-1">Hello, {user.name}!</h1>
+          <div className='flex flex-row gap-1 mb-1 justify-center'>
+            <h1>Hello,</h1>
+            <h1 className="font-bold">{user.name}</h1>
+            <h1 className='-ml-1'>!</h1>
+          </div>
         </div>
 
         {/* Progress Section */}

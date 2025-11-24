@@ -1,13 +1,23 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { StudyDetailView } from './StudyDetailView';
 import { studyMatches } from '../../config/mock';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import StudyMatchCard from '../StudyMatchCard';
+import useStudyMaxer from '../hooks/useStudyMaxer';
 
 const HomeScreen = () => {
   const [selectedStudy, setSelectedStudy] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState(Math.round(studyMatches.length/2) - 1);
   const [savedItems, setSavedItems] = useState<string[]>([]);
+
+  const { setShowNavigation } = useStudyMaxer();
+
+  useEffect(() => {
+    if(selectedStudy)
+      setShowNavigation(false);
+    else
+      setShowNavigation(true);
+  }, [selectedStudy]);
 
   // Touch Handling State
   const touchStartX = useRef<number | null>(null);
@@ -60,8 +70,8 @@ const HomeScreen = () => {
     <div className="flex-1 flex flex-col min-h-0 relative pb-28"> 
       
       {/* Header */}
-      <div className="h-14 shrink-0 flex items-center justify-center px-6 border-b border-gray-800/30">
-        <h1 className="text-sm font-medium tracking-[0.2em] uppercase text-gray-500">Your Matches</h1>
+      <div className="h-14 mt-10 shrink-0 flex items-center justify-center px-6 border-b border-gray-800/30">
+        <h1 className="text-xl font-medium tracking-[0.2em] uppercase text-gray-500">Your Matches</h1>
       </div>
 
       {/* Main Carousel Wrapper - flex-1 füllt den verfügbaren Platz */}
@@ -120,7 +130,7 @@ const HomeScreen = () => {
       </div>
 
       {/* Dots - Unter dem Carousel, über der Nav */}
-      <div className="h-6 shrink-0 flex items-center justify-center gap-2 z-10">
+      <div className="h-6 shrink-0 flex items-center -mt-5 justify-center gap-2 z-10">
         {studyMatches.map((_, index) => (
           <button
             key={index}

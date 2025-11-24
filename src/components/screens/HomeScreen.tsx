@@ -110,6 +110,7 @@ const HomeScreen = () => {
                     isActive={index === currentIndex}
                     isSaved={savedItems.includes(study.id)}
                     onSave={(e: any) => { e.stopPropagation(); handleSave(study.id); }}
+                    onClick={() => setSelectedStudy(study.id)}
                   />
                 </div>
               ))}

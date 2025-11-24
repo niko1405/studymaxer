@@ -9,14 +9,14 @@ interface StudyMatchCardProps {
   isActive: boolean;
 }
 
-const StudyMatchCard = ({ study, onClick, isSaved, onSave, isActive }: any) => {
+const StudyMatchCard = ({ study, onClick, isSaved, onSave, isActive }: StudyMatchCardProps) => {
   const Icon = study.icon;
 
   return (
     <div
       onClick={onClick}
       className={`
-        relative w-full h-full bg-[#111e33] rounded-[2rem] overflow-hidden 
+        relative w-full h-full bg-[#111e33] rounded-4xl overflow-hidden 
         border transition-all duration-500 flex flex-col cursor-pointer
         will-change-transform backface-hidden
         ${isActive 
@@ -35,7 +35,7 @@ const StudyMatchCard = ({ study, onClick, isSaved, onSave, isActive }: any) => {
           draggable="false"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/80 via-[#0a1628]/95 to-[#0a1628]"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-[#0a1628]/80 via-[#0a1628]/95 to-[#0a1628]"></div>
       </div>
 
       <div className="relative z-10 flex flex-col h-full p-6 sm:p-8">

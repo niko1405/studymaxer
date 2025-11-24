@@ -37,7 +37,7 @@ export function OnboardingQuestions() {
     if (currentStep < questions.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      setAppState('main');
+      setAppState('evaluating');
     }
   };
 

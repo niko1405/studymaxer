@@ -1,7 +1,8 @@
-import { Code, Brain, Heart, Briefcase, Microscope, Palette, Hammer, Zap, Wrench, ChefHat, Beaker } from 'lucide-react';
+import { Code, Brain, Heart, Briefcase, Microscope, Palette, Hammer, Zap, Wrench, ChefHat, Beaker, GraduationCap, Building2, Award, Globe, Code2, Calculator } from 'lucide-react';
 import { Leaf, Dumbbell, Music, BookOpen, Landmark } from 'lucide-react';
+import type { Slide } from '../types/types';
 
-export const studyMatches = [
+export const studyMatchess = [
   {
     id: 'informatik',
     title: 'Computer Science',
@@ -125,6 +126,43 @@ export const studyMatches = [
 ];
 
 
+export const studyMatches = [
+  {
+    id: '1',
+    title: 'Computer Science',
+    type: 'B.Sc.',
+    match: 95,
+    description: 'A degree program focused on development, programming, and application of computer systems. Perfect for problem solvers.',
+    icon: Code2,
+    careers: ['Software Dev', 'Data Scientist', 'Architect'],
+    glowColor: '#3b82f6', // blue
+    backgroundImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80',
+  },
+  {
+    id: '2',
+    title: 'Data Science',
+    type: 'M.Sc.',
+    match: 88,
+    description: 'Analyze complex data sets to drive decision making. Combines statistics, math, and computer science.',
+    icon: Calculator,
+    careers: ['Data Analyst', 'ML Engineer', 'Consultant'],
+    glowColor: '#8b5cf6', // purple
+    backgroundImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80',
+  },
+  {
+    id: '3',
+    title: 'Biotechnology',
+    type: 'B.Sc.',
+    match: 82,
+    description: 'The intersection of biology and technology. Develop new products for medicine and agriculture.',
+    icon: Microscope,
+    careers: ['Lab Researcher', 'Biotech Engineer'],
+    glowColor: '#10b981', // emerald
+    backgroundImage: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80',
+  }
+];
+
+
 export const questions = [
   {
     id: 1,
@@ -209,4 +247,40 @@ export const questions = [
     ],
     maxSelections: 5,
   },
+];
+
+export const slides: Slide[] = [
+  {
+    id: 'intro',
+    type: 'hero',
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    title: "Find Your Path",
+    description: "Discover the perfect degree program or apprenticeship tailored to your strengths."
+  },
+  {
+    id: 'partners',
+    type: 'partners',
+    title: "Strong Network",
+    description: "We work with top-tier universities and industry leaders to get you the best spots.",
+    partners: [ 
+      { name: "Tech Univ", icon: <GraduationCap /> },
+      { name: "Global Corp", icon: <Building2 /> },
+      { name: "Innovate", icon: <Briefcase /> },
+      { name: "Future Lab", icon: <Globe /> },
+      { name: "Design Inst", icon: <Award /> },
+      { name: "Tech Univ", icon: <GraduationCap /> },
+      { name: "Global Corp", icon: <Building2 /> },
+    ]
+  },
+  {
+    id: 'stats',
+    type: 'stats',
+    title: "Proven Success",
+    description: "Join a massive community of students who have found their way.",
+    stats: [
+      { value: 300000, suffix: "+", label: "Users Helped" },
+      { value: 98, suffix: "%", label: "Success Rate" },
+      { value: 5000, suffix: "", label: "Partners" }
+    ]
+  }
 ];

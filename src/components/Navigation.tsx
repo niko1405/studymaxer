@@ -6,41 +6,37 @@ const Navigation = () => {
     const navigate = useNavigate();
     const { activeTab } = useStudyMaxer();
 
-    return (
-        <nav className="fixed bottom-0 left-0 right-0 bg-[#0f1f36] border-t border-gray-800 animate-in slide-in-from-bottom duration-300">
-            <div className="flex justify-around items-center h-20 max-w-2xl mx-auto">
-                <button
-                    onClick={() => navigate('/home')}
-                    className={`flex flex-col items-center justify-center gap-1 transition-colors ${activeTab === 'home' ? 'text-[#3b82f6]' : 'text-gray-400'
-                        }`}
-                >
-                    <Home className="w-6 h-6" />
-                    <span className="text-xs">Home</span>
-                </button>
-
-                <button
-                    onClick={() => navigate('/premium')}
-                    className={`flex flex-col items-center justify-center gap-1 transition-colors relative ${activeTab === 'premium' ? 'text-[#3b82f6]' : 'text-gray-400'
-                        }`}
-                >
-                    <Award className="w-6 h-6" />
-                    <span className="text-xs">Premium</span>
-                    {activeTab !== 'premium' && (
-                        <div className="absolute top-0 right-3 w-2 h-2 bg-[#3b82f6] rounded-full"></div>
-                    )}
-                </button>
-
-                <button
-                    onClick={() => navigate('/profile')}
-                    className={`flex flex-col items-center justify-center gap-1 transition-colors ${activeTab === 'profile' ? 'text-[#3b82f6]' : 'text-gray-400'
-                        }`}
-                >
-                    <User className="w-6 h-6" />
-                    <span className="text-xs">Profile</span>
-                </button>
+  return (
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-auto pointer-events-none">
+      <nav className="bg-[#0f1f36]/90 backdrop-blur-xl border border-gray-700/50 rounded-2xl px-6 py-3 shadow-2xl flex items-center gap-10 ring-1 ring-white/5 pointer-events-auto transform translate-y-0 hover:scale-105 transition-transform duration-300">
+        {[
+          { id: 'home', icon: Home, label: 'Home' },
+          { id: 'premium', icon: Award, label: 'Premium' },
+          { id: 'profile', icon: User, label: 'Profile' }
+        ].map((item) => (
+          <button
+            key={item.id}
+            onClick={() => navigate(`${item.id}`)}
+            className="group relative flex flex-col items-center justify-center gap-1 min-w-12"
+          >
+            <div className={`
+              p-2 rounded-xl transition-all duration-300 ease-out
+              ${activeTab === item.id 
+                ? 'bg-blue-500/20 text-blue-400 -translate-y-0.5' 
+                : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'}
+            `}>
+              <item.icon className={`w-6 h-6 ${activeTab === item.id ? 'fill-blue-500/20' : ''}`} />
             </div>
-        </nav>
-    );
-}
+            
+            <span className={`
+              absolute -bottom-2 w-1 h-1 rounded-full bg-blue-400 transition-all duration-300
+              ${activeTab === item.id ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}
+            `} />
+          </button>
+        ))}
+      </nav>
+    </div>
+  );
+};
 
 export default Navigation;

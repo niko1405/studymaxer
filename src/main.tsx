@@ -8,7 +8,7 @@ import "./index.css";
 
 
 import { MainApp } from "./components/MainApp.tsx";
-import { HomeScreen } from "./components/screens/HomeScreen.tsx";
+import HomeScreen from "./components/screens/HomeScreen.tsx";
 import { PremiumScreen } from "./components/screens/PremiumScreen.tsx";
 import { ProfileScreen } from "./components/screens/ProfileScreen.tsx";
 

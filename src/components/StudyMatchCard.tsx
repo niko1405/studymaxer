@@ -1,143 +1,91 @@
 import { Bookmark, BookmarkCheck } from 'lucide-react';
+import type { studyMatches } from '../config/mock';
 
 interface StudyMatchCardProps {
-  study: {
-    id: string;
-    title: string;
-    type: string;
-    match: number;
-    description: string;
-    icon: any;
-    careers: string[];
-    gradient: string;
-    glowColor: string;
-    backgroundImage: string;
-  };
+  study: typeof studyMatches[0];
   onClick: () => void;
   isSaved: boolean;
   onSave: (e: React.MouseEvent) => void;
+  isActive: boolean;
 }
 
-export function StudyMatchCard({ study, onClick, isSaved, onSave }: StudyMatchCardProps) {
+const StudyMatchCard = ({ study, onClick, isSaved, onSave, isActive }: any) => {
   const Icon = study.icon;
 
   return (
     <div
       onClick={onClick}
-      className="relative rounded-3xl p-6 cursor-pointer transform transition-all hover:scale-[1.02] border border-gray-700/50 overflow-hidden animate-in fade-in duration-500"
+      className={`
+        relative w-full h-full bg-[#111e33] rounded-[2rem] overflow-hidden 
+        border transition-all duration-500 flex flex-col cursor-pointer
+        will-change-transform backface-hidden
+        ${isActive 
+          ? 'scale-100 opacity-100 border-gray-600/50 shadow-2xl shadow-black/50' 
+          : 'scale-95 opacity-50 border-transparent shadow-none grayscale-[0.5]'}
+      `}
       style={{
-        background: `linear-gradient(to bottom, ${study.glowColor}, transparent)`,
+        transform: isActive ? 'scale(1) translateZ(0)' : 'scale(0.95) translateZ(0)',
       }}
     >
-      {/* Background Image */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 z-0 select-none">
         <img 
           src={study.backgroundImage} 
           alt="" 
-          className="w-full h-full object-cover opacity-30"
+          className="w-full h-full object-cover opacity-25" 
+          draggable="false"
+          loading="eager"
         />
-        <div className="absolute inset-0 bg-linear-to-t from-[#0a1628] via-[#0a1628]/90 to-[#0a1628]/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/80 via-[#0a1628]/95 to-[#0a1628]"></div>
       </div>
 
-      {/* Glowing Circle Effect */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div
-          className="w-64 h-64 rounded-full opacity-30 blur-3xl"
-          style={{
-            background: `radial-gradient(circle, ${study.glowColor}, transparent)`,
-          }}
-        ></div>
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 flex flex-col max-h-1/3">
-        {/* Top Row */}
-        <div className="flex items-start justify-between mb-4">
-          {/* Left: Icon and Type Badge */}
-          <div className="flex flex-col gap-3">
-            <div className="w-14 h-14 rounded-2xl bg-gray-900/80 backdrop-blur-sm flex items-center justify-center border-2 border-gray-600 shadow-lg">
-              <Icon className="w-7 h-7 text-[#3b82f6]" />
+      <div className="relative z-10 flex flex-col h-full p-6 sm:p-8">
+        <div className="flex justify-between items-start shrink-0 mb-4">
+          <div className="flex gap-4 items-center">
+            <div className="w-14 h-14 rounded-2xl bg-white/5 backdrop-blur-sm flex items-center justify-center border border-white/10 shadow-lg">
+              <Icon className="w-7 h-7" style={{ color: isActive ? study.glowColor : '#9ca3af' }} />
             </div>
-            <span className="text-sm px-3 py-1.5 bg-gray-900/80 backdrop-blur-sm border border-gray-600 rounded-full inline-block shadow-lg">
-              {study.type}
-            </span>
-          </div>
-          
-          {/* Right: Match Percentage and Save Button */}
-          <div className="flex flex-col items-end gap-3">
-            <button
-              onClick={onSave}
-              className="w-10 h-10 rounded-full bg-gray-900/80 backdrop-blur-sm border border-gray-600 flex items-center justify-center hover:bg-gray-800/90 transition-all shadow-lg"
-            >
-              {isSaved ? (
-                <BookmarkCheck className="w-5 h-5 text-[#3b82f6]" />
-              ) : (
-                <Bookmark className="w-5 h-5 text-gray-300" />
-              )}
-            </button>
-            <div className="text-right bg-gray-900/80 backdrop-blur-sm px-4 py-2 rounded-2xl border border-gray-600 shadow-lg">
-              <div className="text-4xl mb-1">{study.match}%</div>
-              <div className="text-xs text-gray-400 tracking-wider">MATCH</div>
+            <div className="flex flex-col">
+              <span className="text-[10px] text-gray-400 font-mono uppercase tracking-widest mb-0.5">Match Score</span>
+              <span className="text-3xl font-bold leading-none tracking-tight" style={{ color: isActive ? study.glowColor : 'white' }}>
+                {study.match}%
+              </span>
             </div>
           </div>
+          <button onClick={onSave} className="p-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 active:scale-90 transition-all backdrop-blur-sm">
+            {isSaved ? <BookmarkCheck className="w-5 h-5 text-blue-400" /> : <Bookmark className="w-5 h-5 text-gray-400" />}
+          </button>
         </div>
 
-        {/* Title */}
-        <h2 className="mb-6 text-3xl">{study.title}</h2>
+        <div className="shrink-0 space-y-3 mt-2">
+          <span className="inline-block px-3 py-1 bg-white/5 rounded-lg text-xs font-medium text-gray-300 border border-white/10">
+            {study.type}
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white leading-[1.1] tracking-tight">
+            {study.title}
+          </h2>
+        </div>
 
-        {/* Description */}
-        <p className="text-gray-200 mb-auto leading-relaxed">
-          {study.description}
-        </p>
+        {/* Spacer for visual balance - pushes bottom content down */}
+        <div className="flex-1"></div>
 
-        {/* Concentric Circles Visual */}
-        <div className="flex items-center justify-center my-8">
-          <div className="relative w-48 h-48">
-            {[0, 1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="absolute inset-0 rounded-full border-2 opacity-30"
-                style={{
-                  borderColor: study.glowColor,
-                  transform: `scale(${1 - i * 0.2})`,
-                  top: `${i * 10}%`,
-                  left: `${i * 10}%`,
-                  right: `${i * 10}%`,
-                  bottom: `${i * 10}%`,
-                }}
-              ></div>
+        <div className="mt-auto shrink-0 space-y-5">
+          <p className="text-gray-400 text-sm sm:text-base leading-relaxed line-clamp-3">
+            {study.description}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {study.careers.map((career: string) => (
+              <span key={career} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs text-gray-300">
+                {career}
+              </span>
             ))}
-            <div
-              className="absolute inset-0 rounded-full blur-2xl"
-              style={{
-                background: study.glowColor,
-                transform: 'scale(0.4)',
-                top: '30%',
-                left: '30%',
-                right: '30%',
-                bottom: '30%',
-              }}
-            ></div>
           </div>
+          <button className="w-full bg-[#3b82f6] hover:bg-[#2563eb] text-white py-4 rounded-2xl font-semibold shadow-lg shadow-blue-900/20 active:scale-[0.98] transition-all text-lg">
+            View Details
+          </button>
         </div>
-
-        {/* Career Tags */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {study.careers.map((career) => (
-            <span
-              key={career}
-              className="px-4 py-2 bg-gray-900/70 backdrop-blur-sm border border-gray-600 rounded-full text-gray-200 shadow-lg"
-            >
-              {career}
-            </span>
-          ))}
-        </div>
-
-        {/* CTA Button */}
-        <button className="w-full bg-[#3b82f6] hover:bg-[#2563eb] text-white text-lg py-4 rounded-full transition-colors flex items-center justify-center shadow-lg">
-          Discover Details
-        </button>
       </div>
     </div>
   );
-}
+};
+
+export default StudyMatchCard;

@@ -10,7 +10,6 @@ interface StudyDetailViewProps {
     description: string;
     icon: any;
     careers: string[];
-    gradient: string;
     glowColor: string;
     backgroundImage: string;
   };
@@ -72,7 +71,7 @@ export function StudyDetailView({ study, onBack, isSaved, onSave }: StudyDetailV
 
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8">
-              <div className={`inline-flex w-20 h-20 rounded-full bg-gradient-to-br ${study.gradient} items-center justify-center mb-4`}>
+              <div className={`inline-flex w-20 h-20 rounded-full bg-linear-to-br items-center justify-center mb-4`}>
                 <Brain className="w-10 h-10 text-white" />
               </div>
               <h1 className="mb-2">Discover Your Fit</h1>
@@ -97,7 +96,7 @@ export function StudyDetailView({ study, onBack, isSaved, onSave }: StudyDetailV
               ))}
             </div>
 
-            <button className="w-full mt-8 bg-gradient-to-r from-[#3b82f6] to-[#8b5cf6] hover:from-[#2563eb] hover:to-[#7c3aed] text-white py-4 rounded-full transition-all flex items-center justify-center">
+            <button className="w-full mt-8 bg-linear-to-r from-[#3b82f6] to-[#8b5cf6] hover:from-[#2563eb] hover:to-[#7c3aed] text-white py-4 rounded-full transition-all flex items-center justify-center">
               Complete Assessment
             </button>
           </div>
@@ -141,7 +140,7 @@ export function StudyDetailView({ study, onBack, isSaved, onSave }: StudyDetailV
       {/* Hero Section */}
       <div className="px-6 py-12 max-w-4xl mx-auto">
         <div className="flex items-start gap-6 mb-8 animate-in slide-in-from-top duration-500">
-          <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${study.gradient} flex items-center justify-center shadow-xl`}>
+          <div className={`w-20 h-20 rounded-2xl bg-linear-to-br flex items-center justify-center shadow-xl`}>
             <Icon className="w-10 h-10 text-white" />
           </div>
           
@@ -175,7 +174,7 @@ export function StudyDetailView({ study, onBack, isSaved, onSave }: StudyDetailV
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   <div className="flex gap-4">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${scheduleIcon.color} flex items-center justify-center flex-shrink-0 shadow-lg`}>
+                    <div className={`w-12 h-12 rounded-xl bg-linear-to-br ${scheduleIcon.color} flex items-center justify-center shrink-0 shadow-lg`}>
                       <ScheduleIcon className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1">
@@ -216,7 +215,7 @@ export function StudyDetailView({ study, onBack, isSaved, onSave }: StudyDetailV
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="flex items-start gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#3b82f6] to-[#8b5cf6] flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-linear-to-br from-[#3b82f6] to-[#8b5cf6] flex items-center justify-center shrink-0">
                     <GraduationCap className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
@@ -252,8 +251,8 @@ export function StudyDetailView({ study, onBack, isSaved, onSave }: StudyDetailV
         </div>
 
         {/* Quiz CTA */}
-        <div className="bg-gradient-to-br from-[#3b82f6]/20 to-[#8b5cf6]/20 border-2 border-[#3b82f6]/50 rounded-3xl p-8 text-center animate-in zoom-in duration-500 delay-400">
-          <div className="inline-flex w-16 h-16 rounded-full bg-gradient-to-br from-[#3b82f6] to-[#8b5cf6] items-center justify-center mb-4">
+        <div className="bg-linear-to-br from-[#3b82f6]/20 to-[#8b5cf6]/20 border-2 border-[#3b82f6]/50 rounded-3xl p-8 text-center animate-in zoom-in duration-500 delay-400">
+          <div className="inline-flex w-16 h-16 rounded-full bg-linear-to-br from-[#3b82f6] to-[#8b5cf6] items-center justify-center mb-4">
             <Brain className="w-8 h-8 text-white" />
           </div>
           <h2 className="mb-3 text-2xl">Want to learn more?</h2>
@@ -262,7 +261,7 @@ export function StudyDetailView({ study, onBack, isSaved, onSave }: StudyDetailV
           </p>
           <button
             onClick={() => setShowQuiz(true)}
-            className="bg-gradient-to-r from-[#3b82f6] to-[#8b5cf6] hover:from-[#2563eb] hover:to-[#7c3aed] text-white px-8 py-4 rounded-full transition-all text-lg shadow-lg"
+            className="bg-linear-to-r from-[#3b82f6] to-[#8b5cf6] hover:from-[#2563eb] hover:to-[#7c3aed] text-white px-8 py-4 rounded-full transition-all text-lg shadow-lg"
           >
             Start Assessment
           </button>

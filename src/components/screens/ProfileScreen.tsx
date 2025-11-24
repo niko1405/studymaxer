@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Camera, Mail, Bell, Lock, HelpCircle, LogOut, ChevronRight, TrendingUp, User as UserIcon, Target, Calendar, MessageSquare, Award } from 'lucide-react';
+import { Camera, Mail, Bell, Lock, HelpCircle, LogOut, ChevronRight } from 'lucide-react';
 import { ImageWithFallback } from '../ImageWithFallback';
+import { nextSteps, savedCareers, savedStudyPrograms, user } from '../../config/mock';
 
 export function ProfileScreen() {
   const [progress, setProgress] = useState(0);
@@ -14,96 +15,11 @@ export function ProfileScreen() {
     return () => clearTimeout(timer);
   }, []);
 
-  const user = {
-    name: 'Alex',
-    email: 'alex.mueller@email.com',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
-  };
-
-  const savedStudyPrograms = [
-    {
-      id: '1',
-      title: 'Computer Science',
-      institution: 'MIT',
-      location: 'Cambridge, MA',
-      image: 'https://images.unsplash.com/photo-1629904853893-c2c8981a1dc5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200',
-    },
-    {
-      id: '2',
-      title: 'Psychology',
-      institution: 'Stanford University',
-      location: 'Stanford, CA',
-      image: 'https://images.unsplash.com/photo-1561993629-67302018480e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200',
-    },
-  ];
-
-  const savedCareers = [
-    {
-      id: '1',
-      title: 'Carpenter',
-      institution: 'Johnson & Sons Carpentry',
-      location: 'Munich, Germany',
-      image: 'https://images.unsplash.com/photo-1590880795696-20c7dfadacde?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200',
-    },
-    {
-      id: '2',
-      title: 'Professional Chef',
-      institution: 'Culinary Institute',
-      location: 'Berlin, Germany',
-      image: 'https://images.unsplash.com/photo-1740727665746-cfe80ababc23?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200',
-    },
-  ];
-
-  const nextSteps = [
-    {
-      id: '1',
-      icon: TrendingUp,
-      title: 'Compare your Top 2',
-      description: 'See side-by-side comparison of your favorite options',
-      color: 'from-purple-500 to-pink-500',
-    },
-    {
-      id: '2',
-      icon: UserIcon,
-      title: 'Take the Personality Test',
-      description: 'Discover which careers match your personality traits',
-      color: 'from-teal-500 to-cyan-500',
-    },
-    {
-      id: '3',
-      icon: Calendar,
-      title: 'Attend Open House Events',
-      description: 'Visit universities and training centers in person',
-      color: 'from-blue-500 to-indigo-500',
-    },
-    {
-      id: '4',
-      icon: MessageSquare,
-      title: 'Talk to Current Students',
-      description: 'Get firsthand insights from people in your field',
-      color: 'from-orange-500 to-amber-500',
-    },
-    {
-      id: '5',
-      icon: Target,
-      title: 'Set Your Application Goals',
-      description: 'Create a timeline for your application process',
-      color: 'from-green-500 to-emerald-500',
-    },
-    {
-      id: '6',
-      icon: Award,
-      title: 'Explore Scholarship Options',
-      description: 'Find funding opportunities for your education',
-      color: 'from-rose-500 to-red-500',
-    },
-  ];
-
   const currentItems = activeTab === 'study' ? savedStudyPrograms : savedCareers;
 
   return (
     <div className="min-h-screen bg-[#0a1628] text-white px-6 py-8 animate-in fade-in duration-500">
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-2xl mx-auto pb-[75px]">
         {/* Profile Header */}
         <div className="text-center mb-8 animate-in slide-in-from-top duration-500">
           <div className="relative inline-block mb-4">
@@ -129,7 +45,7 @@ export function ProfileScreen() {
           
           <div className="w-full bg-gray-700 rounded-full h-3 mb-2 overflow-hidden">
             <div
-              className="bg-gradient-to-r from-[#f59e0b] to-[#d97706] h-3 rounded-full transition-all duration-1000 ease-out"
+              className="bg-linear-to-r from-[#f59e0b] to-[#d97706] h-3 rounded-full transition-all duration-1000 ease-out"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
@@ -168,7 +84,7 @@ export function ProfileScreen() {
                 className="bg-gray-800/50 border border-gray-700 rounded-2xl p-4 flex items-center gap-4 hover:bg-gray-800 transition-all cursor-pointer animate-in slide-in-from-left duration-300"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0">
+                <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0">
                   <img
                     src={item.image}
                     alt={item.title}
@@ -204,7 +120,7 @@ export function ProfileScreen() {
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   <div className="flex items-start gap-4">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform`}>
+                    <div className={`w-12 h-12 rounded-xl bg-linear-to-br ${step.color} flex items-center justify-center shrink-0 shadow-lg group-hover:scale-110 transition-transform`}>
                       <Icon className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1">

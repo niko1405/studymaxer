@@ -106,7 +106,7 @@ export function StudyDetailView({ study, onBack, isSaved, onSave }: StudyDetailV
   }
 
   return (
-    <div className="min-h-screen bg-[#0a1628] text-white animate-in fade-in duration-300">
+    <div className="min-h-screen bg-[#0a1628] text-white animate-in fade-in duration-300 pb-[100px]">
       {/* Fixed Header */}
       <div className="sticky top-0 z-50 bg-[#0a1628]/95 backdrop-blur-sm border-b border-gray-800 px-6 py-4">
         <div className="flex items-center justify-between max-w-4xl mx-auto">

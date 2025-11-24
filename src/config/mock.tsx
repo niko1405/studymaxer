@@ -1,4 +1,4 @@
-import { Code, Brain, Heart, Briefcase, Microscope, Palette, Hammer, Zap, Wrench, ChefHat, Beaker, GraduationCap, Building2, Award, Globe, Code2, Calculator } from 'lucide-react';
+import { Code, Brain, Heart, Briefcase, Microscope, Palette, Hammer, Zap, Wrench, ChefHat, Beaker, GraduationCap, Building2, Award, Globe, Code2, Calculator, TrendingUp, UserIcon, Calendar, MessageSquare, Target } from 'lucide-react';
 import { Leaf, Dumbbell, Music, BookOpen, Landmark } from 'lucide-react';
 import type { Slide } from '../types/types';
 
@@ -140,17 +140,28 @@ export const studyMatches = [
   },
   {
     id: '2',
+    title: 'Design',
+    type: 'Study Program',
+    match: 71,
+    description: 'Creative degree program for visual communication and design.',
+    icon: Palette,
+    careers: ['#Designer', '#ArtDirector', '#UXDesigner'],
+    glowColor: 'rgba(249, 115, 22, 0.5)',
+    backgroundImage: 'https://images.unsplash.com/photo-1664520132859-727fc515fc8d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmFwaGljJTIwZGVzaWduJTIwY3JlYXRpdmV8ZW58MXx8fHwxNzYzMzc0Njk5fDA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+  {
+    id: '3',
     title: 'Data Science',
     type: 'M.Sc.',
     match: 88,
     description: 'Analyze complex data sets to drive decision making. Combines statistics, math, and computer science.',
     icon: Calculator,
     careers: ['Data Analyst', 'ML Engineer', 'Consultant'],
-    glowColor: '#8b5cf6', // purple
+    glowColor: '#8b5cf6',
     backgroundImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80',
   },
   {
-    id: '3',
+    id: '4',
     title: 'Biotechnology',
     type: 'B.Sc.',
     match: 82,
@@ -262,7 +273,7 @@ export const slides: Slide[] = [
     type: 'partners',
     title: "Strong Network",
     description: "We work with top-tier universities and industry leaders to get you the best spots.",
-    partners: [ 
+    partners: [
       { name: "Tech Univ", icon: <GraduationCap /> },
       { name: "Global Corp", icon: <Building2 /> },
       { name: "Innovate", icon: <Briefcase /> },
@@ -283,4 +294,90 @@ export const slides: Slide[] = [
       { value: 5000, suffix: "", label: "Partners" }
     ]
   }
+];
+
+
+export const user = {
+  name: 'Alex',
+  email: 'alex.mueller@email.com',
+  avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
+};
+
+export const savedStudyPrograms = [
+  {
+    id: '1',
+    title: 'Computer Science',
+    institution: 'MIT',
+    location: 'Cambridge, MA',
+    image: 'https://images.unsplash.com/photo-1629904853893-c2c8981a1dc5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200',
+  },
+  {
+    id: '2',
+    title: 'Psychology',
+    institution: 'Stanford University',
+    location: 'Stanford, CA',
+    image: 'https://images.unsplash.com/photo-1561993629-67302018480e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200',
+  },
+];
+
+export const savedCareers = [
+  {
+    id: '1',
+    title: 'Carpenter',
+    institution: 'Johnson & Sons Carpentry',
+    location: 'Munich, Germany',
+    image: 'https://images.unsplash.com/photo-1590880795696-20c7dfadacde?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200',
+  },
+  {
+    id: '2',
+    title: 'Professional Chef',
+    institution: 'Culinary Institute',
+    location: 'Berlin, Germany',
+    image: 'https://images.unsplash.com/photo-1740727665746-cfe80ababc23?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200',
+  },
+];
+
+export const nextSteps = [
+  {
+    id: '1',
+    icon: TrendingUp,
+    title: 'Compare your Top 2',
+    description: 'See side-by-side comparison of your favorite options',
+    color: 'from-purple-500 to-pink-500',
+  },
+  {
+    id: '2',
+    icon: UserIcon,
+    title: 'Take the Personality Test',
+    description: 'Discover which careers match your personality traits',
+    color: 'from-teal-500 to-cyan-500',
+  },
+  {
+    id: '3',
+    icon: Calendar,
+    title: 'Attend Open House Events',
+    description: 'Visit universities and training centers in person',
+    color: 'from-blue-500 to-indigo-500',
+  },
+  {
+    id: '4',
+    icon: MessageSquare,
+    title: 'Talk to Current Students',
+    description: 'Get firsthand insights from people in your field',
+    color: 'from-orange-500 to-amber-500',
+  },
+  {
+    id: '5',
+    icon: Target,
+    title: 'Set Your Application Goals',
+    description: 'Create a timeline for your application process',
+    color: 'from-green-500 to-emerald-500',
+  },
+  {
+    id: '6',
+    icon: Award,
+    title: 'Explore Scholarship Options',
+    description: 'Find funding opportunities for your education',
+    color: 'from-rose-500 to-red-500',
+  },
 ];

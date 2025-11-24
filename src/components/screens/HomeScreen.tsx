@@ -68,7 +68,7 @@ const HomeScreen = () => {
       <div className="flex-1 w-full flex flex-col items-center justify-center overflow-hidden py-4">
         
         {/* Carousel Container mit angepassten Breiten für Desktop (md:max-w-3xl, lg:max-w-5xl) */}
-        <div className="w-full h-full max-w-md md:max-w-3xl lg:max-w-5xl mx-auto relative flex flex-col">
+        <div className="w-full h-full md:max-w-3xl lg:max-w-5xl mx-auto relative flex flex-col">
           
           {/* Desktop Arrows - Außerhalb des Cards-Bereichs positioniert */}
           <div className="hidden md:flex absolute inset-y-0 -left-16 -right-16 items-center justify-between pointer-events-none z-20">

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, Send, Search, Crown } from 'lucide-react';
+import { ArrowLeft, Send, Search, Crown, Library, Lock, Video, MessageCircle, ArrowRight, Zap, Sparkles } from 'lucide-react';
 import { ImageWithFallback } from '../ImageWithFallback';
 
 const mentors = [
@@ -330,7 +330,7 @@ export function PremiumScreen() {
           </button>
 
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#f59e0b] to-[#d97706] rounded-full mb-4">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-linear-to-br from-[#f59e0b] to-[#d97706] rounded-full mb-4">
               <Crown className="w-10 h-10 text-white" />
             </div>
             <h1 className="mb-2">Unlock Premium</h1>
@@ -378,7 +378,7 @@ export function PremiumScreen() {
               </div>
             </div>
 
-            <button className="w-full bg-gradient-to-r from-[#3b82f6] to-[#8b5cf6] hover:from-[#2563eb] hover:to-[#7c3aed] text-white py-4 rounded-full transition-colors flex items-center justify-center">
+            <button className="w-full bg-linear-to-r from-[#3b82f6] to-[#8b5cf6] hover:from-[#2563eb] hover:to-[#7c3aed] text-white py-4 rounded-full transition-colors flex items-center justify-center">
               Subscribe Now
             </button>
           </div>
@@ -391,65 +391,113 @@ export function PremiumScreen() {
     );
   }
 
-  // Features View (Default)
+
   return (
-    <div className="min-h-screen bg-[#0a1628] text-white px-6 py-8">
-      <div className="max-w-2xl mx-auto">
-        <div className="flex items-center justify-between mb-6">
-          <h1>Premium Features</h1>
-          <button
-            onClick={() => setCurrentView('upgrade')}
-            className="flex items-center gap-2 bg-gradient-to-r from-[#f59e0b] to-[#d97706] px-4 py-2 rounded-full hover:from-[#d97706] hover:to-[#b45309] transition-colors"
-          >
-            <Crown className="w-4 h-4" />
-            <span>Upgrade</span>
-          </button>
-        </div>
+    <div className="flex-1 overflow-y-auto pb-32 bg-[#0a1628] scroll-smooth">
+      <div className="max-w-2xl mx-auto px-6 py-8">
         
-        <p className="text-gray-400 mb-8">
-          Chat with real students and professionals from your areas of interest
-        </p>
+        {/* Header Section */}
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-white mb-1">Premium</h1>
+            <p className="text-gray-400 text-sm">Unlock your full potential</p>
+          </div>
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/20 animate-pulse">
+            <Crown className="w-6 h-6 text-white" />
+          </div>
+        </div>
 
-        {/* Premium Features Overview */}
-        <div className="grid grid-cols-1 gap-4 mb-8">
-          <button
+        {/* Hero Banner */}
+        <div className="relative rounded-3xl overflow-hidden mb-10 group cursor-pointer border border-orange-500/30">
+          <div className="absolute inset-0 bg-linear-to-r from-orange-600 to-amber-500 opacity-90 transition-opacity group-hover:opacity-100"></div>
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
+          
+          <div className="relative p-6 sm:p-8 flex flex-col items-start">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/20 backdrop-blur-sm text-xs font-bold text-white mb-4 border border-white/10">
+              <Sparkles className="w-3 h-3 text-yellow-300" />
+              <span>PRO MEMBER</span>
+            </div>
+            <h2 className="text-2xl font-bold text-white mb-2">Upgrade to Premium</h2>
+            <p className="text-white/80 text-sm mb-6 max-w-xs">Get unlimited swipes, direct mentor access, and detailed career roadmaps.</p>
+            <button onClick={() => setCurrentView('upgrade')} className="bg-white text-orange-600 px-6 py-3 rounded-xl font-bold shadow-lg hover:scale-105 transition-transform flex items-center gap-2">
+              <Zap className="w-4 h-4 fill-current" />
+              Buy now
+            </button>
+          </div>
+        </div>
+
+        {/* Features Grid */}
+        <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+           Features
+           <span className="text-xs font-normal text-gray-500 bg-gray-800 px-2 py-0.5 rounded-md">3 Available</span>
+        </h3>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          
+          {/* Active Feature: Mentor Chat */}
+          <div 
             onClick={() => setCurrentView('mentors')}
-            className="bg-gradient-to-r from-[#3b82f6]/20 to-transparent border border-[#3b82f6]/50 rounded-2xl p-6 text-left hover:from-[#3b82f6]/30 transition-all"
+            className="col-span-1 sm:col-span-2 bg-[#111e33] border border-blue-500/30 rounded-3xl p-6 relative overflow-hidden group cursor-pointer hover:border-blue-500/60 transition-all"
           >
-            <h3 className="mb-2">💬 Mentor Chat</h3>
-            <p className="text-gray-400 mb-4">
-              Direct 1:1 conversations with experts from your desired fields
-            </p>
-            <div className="inline-block px-3 py-1 bg-green-500/20 border border-green-500 rounded-full text-sm text-green-400">
-              Available
+            <div className="absolute top-0 right-0 p-4 opacity-50 group-hover:opacity-100 transition-opacity">
+               <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+                 <ArrowRight className="w-5 h-5 text-blue-400" />
+               </div>
             </div>
-          </button>
+            
+            <div className="w-12 h-12 rounded-2xl bg-blue-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+              <MessageCircle className="w-6 h-6 text-blue-400" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-1">Mentor Chat</h3>
+            <p className="text-gray-400 text-sm mb-4">Direct 1:1 conversations with experts.</p>
+            
+            {/* Avatars Pile */}
+            <div className="flex items-center -space-x-3">
+               {[1,2,3].map(i => (
+                 <div key={i} className="w-8 h-8 rounded-full border-2 border-[#111e33] bg-gray-600 flex items-center justify-center text-xs overflow-hidden">
+                    <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="" className="w-full h-full object-cover" />
+                 </div>
+               ))}
+               <div className="w-8 h-8 rounded-full border-2 border-[#111e33] bg-gray-700 flex items-center justify-center text-[10px] text-gray-300 font-bold">
+                 +12
+               </div>
+            </div>
+          </div>
 
-          <button
-            onClick={() => setCurrentView('upgrade')}
-            className="bg-gray-800/30 border border-gray-700 rounded-2xl p-6 text-left opacity-60 hover:opacity-80 transition-opacity"
-          >
-            <h3 className="mb-2">🎥 Live Sessions</h3>
-            <p className="text-gray-400 mb-4">
-              Weekly live Q&A sessions with industry experts
-            </p>
-            <div className="inline-block px-3 py-1 bg-gray-600/50 border border-gray-600 rounded-full text-sm text-gray-400">
-              Coming Soon
+          {/* Locked Feature: Live Sessions */}
+          <div className="bg-[#111e33]/50 border border-gray-700/50 rounded-3xl p-6 relative group overflow-hidden">
+            {/* Glass Overlay with Lock */}
+            <div className="absolute inset-0 bg-[#0a1628]/60 backdrop-blur-[2px] flex flex-col items-center justify-center z-10 transition-all group-hover:backdrop-blur-[1px]">
+               <div className="w-10 h-10 rounded-full bg-gray-800/80 border border-gray-600 flex items-center justify-center mb-2 shadow-xl">
+                 <Lock className="w-5 h-5 text-gray-400" />
+               </div>
+               <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Coming Soon</span>
             </div>
-          </button>
 
-          <button
-            onClick={() => setCurrentView('upgrade')}
-            className="bg-gray-800/30 border border-gray-700 rounded-2xl p-6 text-left opacity-60 hover:opacity-80 transition-opacity"
-          >
-            <h3 className="mb-2">📚 Exclusive Content</h3>
-            <p className="text-gray-400 mb-4">
-              Access to detailed study guides and career roadmaps
-            </p>
-            <div className="inline-block px-3 py-1 bg-gray-600/50 border border-gray-600 rounded-full text-sm text-gray-400">
-              Coming Soon
+            <div className="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center mb-3">
+              <Video className="w-5 h-5 text-purple-400" />
             </div>
-          </button>
+            <h3 className="text-lg font-bold text-gray-300 mb-1">Live Sessions</h3>
+            <p className="text-gray-500 text-xs">Weekly Q&A with industry pros.</p>
+          </div>
+
+          {/* Locked Feature: Exclusive Content */}
+          <div className="bg-[#111e33]/50 border border-gray-700/50 rounded-3xl p-6 relative group overflow-hidden">
+            {/* Glass Overlay with Lock */}
+            <div className="absolute inset-0 bg-[#0a1628]/60 backdrop-blur-[2px] flex flex-col items-center justify-center z-10 transition-all group-hover:backdrop-blur-[1px]">
+               <div className="w-10 h-10 rounded-full bg-gray-800/80 border border-gray-600 flex items-center justify-center mb-2 shadow-xl">
+                 <Lock className="w-5 h-5 text-gray-400" />
+               </div>
+               <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Coming Soon</span>
+            </div>
+
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center mb-3">
+              <Library className="w-5 h-5 text-emerald-400" />
+            </div>
+            <h3 className="text-lg font-bold text-gray-300 mb-1">Roadmaps</h3>
+            <p className="text-gray-500 text-xs">Detailed career guides & paths.</p>
+          </div>
+
         </div>
       </div>
     </div>

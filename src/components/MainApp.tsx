@@ -18,18 +18,14 @@ export function MainApp() {
     return <LoadingScreen onComplete={() => setAppState('main')} />;
 
   return (
-    <div className="bg-[#0a1628] h-dvh w-full flex flex-col overflow-hidden text-white font-sans selection:bg-blue-500/30">
+    <div className="bg-[#0a1628] h-dvh w-full flex flex-col text-white font-sans selection:bg-blue-500/30 select-none">
       
       {/* Content Area */}
-      <main className="flex-1 flex flex-col min-h-0 overflow-hidden relative z-10">
+      <main className="flex-1 flex flex-col relative z-10">
         <Outlet />
       </main>
 
       <Navigation />
-
-      {/* Background Gradients */}
-      <div className="fixed top-0 left-0 w-full h-1/3 bg-linear-to-b from-blue-900/10 to-transparent pointer-events-none" />
-      <div className="fixed bottom-0 left-0 w-full h-1/3 bg-linear-to-t from-[#0a1628] to-transparent pointer-events-none -z-10" />
     </div>
   );
 }

@@ -5,21 +5,99 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import StudyMatchCard from '../StudyMatchCard';
 import useStudyMaxer from '../hooks/useStudyMaxer';
 
+// --- Skeleton Component ---
+// Zeigt die Form der Karte an, während "geladen" wird
+const CardSkeleton = () => (
+  <div className="w-full h-full bg-[#111e33] rounded-4xl border border-white/5 relative overflow-hidden flex flex-col p-6 sm:p-8 animate-pulse">
+    {/* Background pulsing */}
+    <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-20" />
+    
+    {/* Header Skeleton */}
+    <div className="flex justify-between items-start mb-4">
+      <div className="flex gap-4 items-center p-2 -ml-2 rounded-3xl bg-white/5 border border-white/5 w-32 h-16">
+         <div className="w-12 h-12 rounded-2xl bg-white/10" />
+      </div>
+      <div className="w-12 h-12 rounded-full bg-white/5" />
+    </div>
+
+    {/* Title Skeleton */}
+    <div className="space-y-4 mt-4">
+      <div className="w-24 h-6 rounded-lg bg-white/10" />
+      <div className="w-3/4 h-10 rounded-xl bg-white/10" />
+    </div>
+
+    <div className="flex-1" />
+
+    {/* Bottom Skeleton */}
+    <div className="space-y-4 mt-auto">
+      <div className="space-y-2">
+        <div className="w-full h-4 rounded bg-white/5" />
+        <div className="w-5/6 h-4 rounded bg-white/5" />
+        <div className="w-4/6 h-4 rounded bg-white/5" />
+      </div>
+      <div className="flex gap-2">
+        <div className="w-20 h-8 rounded-lg bg-white/10" />
+        <div className="w-24 h-8 rounded-lg bg-white/10" />
+      </div>
+      <div className="w-full h-14 rounded-2xl bg-white/10 mt-4" />
+    </div>
+  </div>
+);
+
 const HomeScreen = () => {
   const [selectedStudy, setSelectedStudy] = useState<string | null>(null);
-  const [currentIndex, setCurrentIndex] = useState(Math.round(studyMatches.length/2) - 1);
+  const [currentIndex, setCurrentIndex] = useState(Math.round(studyMatches.length / 2) - 1);
   const [savedItems, setSavedItems] = useState<string[]>([]);
+  
+  // Loading State nur für den Content-Bereich
+  const [isImagesLoading, setIsImagesLoading] = useState(true);
 
   const { setShowNavigation } = useStudyMaxer();
 
+  // FIX: Preload Images + Minimum Loading Time
+  // Das verhindert das Ruckeln beim ersten Slide, da Bilder VORHER dekodiert werden
   useEffect(() => {
-    if(selectedStudy)
-      setShowNavigation(false);
-    else
-      setShowNavigation(true);
-  }, [selectedStudy]);
+    const preloadImages = async () => {
+      // Wir starten das Laden aller Hintergrundbilder sofort
+      const promises = studyMatches.map((study) => {
+        return new Promise<void>((resolve) => {
+          const img = new Image();
+          img.src = study.backgroundImage;
+          
+          // Wir nutzen 'any' für den Decode-Check, um Typ-Konflikte in strikten Umgebungen zu vermeiden
+          const imgAny = img as any;
 
-  // Touch Handling State
+          if (imgAny.decode) {
+            imgAny.decode()
+              .then(() => resolve())
+              .catch(() => resolve());
+          } else {
+            // Explizite Wrapper beheben den "Type Mismatch" Fehler bei onload/onerror
+            img.onload = () => resolve();
+            img.onerror = () => resolve();
+          }
+        });
+      });
+
+      // Warte kurz, um Skeleton nicht zu flackern, aber lade Bilder im Hintergrund
+      // Erhöht auf 800ms für smootheres Gefühl
+      const minLoadTime = new Promise(resolve => setTimeout(resolve, 800));
+      
+      // Warte auf beides (mindestens 800ms UND Bilder geladen)
+      await Promise.race([Promise.all(promises), minLoadTime]);
+      
+      setIsImagesLoading(false);
+    };
+
+    preloadImages();
+  }, []);
+
+  useEffect(() => {
+    if (selectedStudy) setShowNavigation(false);
+    else setShowNavigation(true);
+  }, [selectedStudy, setShowNavigation]);
+
+  // Touch Handling
   const touchStartX = useRef<number | null>(null);
 
   const handleSave = (id: string) => {
@@ -34,7 +112,6 @@ const HomeScreen = () => {
     if (currentIndex > 0) setCurrentIndex(c => c - 1);
   };
 
-  // Touch Event Handlers
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -66,71 +143,100 @@ const HomeScreen = () => {
   }
 
   return (
-    // pb-28: Platz für Navigation unten
-    <div className="flex-1 flex flex-col min-h-0 relative pb-28"> 
+    <div className="flex-1 flex flex-col min-h-0 relative pb-28">
       
-      {/* Header */}
+      {/* Header - Bleibt immer sichtbar, kein Flackern */}
       <div className="h-14 mt-10 shrink-0 flex items-center justify-center px-6 border-b border-gray-800/30">
         <h1 className="text-xl font-medium tracking-[0.2em] uppercase text-gray-500">Your Matches</h1>
       </div>
 
-      {/* Main Carousel Wrapper - flex-1 füllt den verfügbaren Platz */}
+      {/* Main Carousel Wrapper */}
       <div className="flex-1 w-full flex flex-col items-center justify-center overflow-hidden py-4">
         
-        {/* Carousel Container mit angepassten Breiten für Desktop (md:max-w-3xl, lg:max-w-5xl) */}
         <div className="w-full h-full md:max-w-3xl lg:max-w-5xl mx-auto relative flex flex-col">
           
-          {/* Desktop Arrows - Außerhalb des Cards-Bereichs positioniert */}
-          <div className="hidden md:flex absolute inset-y-0 -left-16 -right-16 items-center justify-between pointer-events-none z-20">
-             <button 
-                onClick={prev} 
-                disabled={currentIndex === 0} 
-                className="pointer-events-auto p-4 rounded-full bg-[#111e33]/90 border border-gray-700/50 text-white hover:bg-gray-700 hover:scale-110 active:scale-95 disabled:opacity-0 disabled:cursor-not-allowed shadow-2xl backdrop-blur-md transition-all"
-              >
-                <ChevronLeft className="w-8 h-8" />
-              </button>
-              <button 
-                onClick={next} 
-                disabled={currentIndex === studyMatches.length - 1} 
-                className="pointer-events-auto p-4 rounded-full bg-[#111e33]/90 border border-gray-700/50 text-white hover:bg-gray-700 hover:scale-110 active:scale-95 disabled:opacity-0 disabled:cursor-not-allowed shadow-2xl backdrop-blur-md transition-all"
-              >
-                <ChevronRight className="w-8 h-8" />
-              </button>
-          </div>
-
-          {/* Slider Track Wrapper */}
-          <div 
-            className="flex-1 w-full flex items-center touch-pan-y"
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
-          >
-            {/* Slider Track - h-full (wichtig!) statt h-[85%] */}
-            <div
-              className="flex h-full w-full transition-transform duration-500 ease-out will-change-transform"
-              style={{ 
-                transform: `translateX(-${currentIndex * 100}%) translateZ(0)`, 
-                transitionTimingFunction: 'cubic-bezier(0.2, 0.8, 0.2, 1)' 
-              }}
-            >
-              {studyMatches.map((study, index) => (
-                // px-4 auf Mobile, px-8 auf Desktop - sorgt dafür, dass die Karte nicht den kompletten Screen touchiert
-                <div key={study.id} className="min-w-full h-full px-4 md:px-8 py-2 flex items-center justify-center">
-                  <StudyMatchCard
-                    study={study}
-                    isActive={index === currentIndex}
-                    isSaved={savedItems.includes(study.id)}
-                    onSave={(e: any) => { e.stopPropagation(); handleSave(study.id); }}
-                    onClick={() => setSelectedStudy(study.id)}
-                  />
-                </div>
-              ))}
+          {/* Desktop Arrows - Nur anzeigen wenn nicht geladen wird */}
+          {!isImagesLoading && (
+            <div className="hidden md:flex absolute inset-y-0 -left-16 -right-16 items-center justify-between pointer-events-none z-20 animate-in fade-in duration-700">
+               <button 
+                  onClick={prev} 
+                  disabled={currentIndex === 0} 
+                  className="pointer-events-auto p-4 rounded-full bg-[#111e33]/90 border border-gray-700/50 text-white hover:bg-gray-700 hover:scale-110 active:scale-95 disabled:opacity-0 disabled:cursor-not-allowed shadow-2xl backdrop-blur-md transition-all"
+                >
+                  <ChevronLeft className="w-8 h-8" />
+                </button>
+                <button 
+                  onClick={next} 
+                  disabled={currentIndex === studyMatches.length - 1} 
+                  className="pointer-events-auto p-4 rounded-full bg-[#111e33]/90 border border-gray-700/50 text-white hover:bg-gray-700 hover:scale-110 active:scale-95 disabled:opacity-0 disabled:cursor-not-allowed shadow-2xl backdrop-blur-md transition-all"
+                >
+                  <ChevronRight className="w-8 h-8" />
+                </button>
             </div>
+          )}
+
+          {/* Content Area: Entweder Skeleton oder Carousel */}
+          <div className="flex-1 w-full relative">
+            
+            {isImagesLoading ? (
+              // --- LOADING STATE ---
+              // Zeigt einen Skeleton genau in der Mitte an (dort wo die aktive Karte sein wird)
+              <div className="absolute inset-0 flex items-center justify-center px-4 md:px-8 py-2 z-30">
+                 <div className="w-full h-full max-w-full">
+                    <CardSkeleton />
+                 </div>
+              </div>
+            ) : (
+              // --- LOADED STATE ---
+              <div 
+                className="flex-1 w-full h-full flex items-center touch-pan-y"
+                onTouchStart={onTouchStart}
+                onTouchEnd={onTouchEnd}
+              >
+                <div
+                  className="flex h-full w-full transition-transform duration-500 ease-out will-change-transform"
+                  style={{ 
+                    // translateZ(0) aktiviert Hardware-Beschleunigung auf dem Container
+                    transform: `translateX(-${currentIndex * 100}%) translateZ(0)`, 
+                    transitionTimingFunction: 'cubic-bezier(0.2, 0.8, 0.2, 1)' 
+                  }}
+                >
+                  {studyMatches.map((study, index) => (
+                    // FIX: "transform-gpu" und "backface-hidden" erzwingen Hardware-Beschleunigung für jede Karte
+                    // Das verhindert Ruckeln, da der Browser die Layer schon vorbereitet hält
+                    <div 
+                      key={study.id} 
+                      className="min-w-full h-full px-4 md:px-8 py-2 flex items-center justify-center transform-gpu backface-hidden"
+                      style={{ 
+                         transform: 'translateZ(0)', // Force GPU
+                         willChange: 'transform'     // Hint to browser
+                      }}
+                    >
+                      <div className={`w-full h-full ${
+                        // Slide-In Animation nur beim ersten Laden
+                        !isImagesLoading ? 'animate-in zoom-in-95 fade-in slide-in-from-bottom-8 duration-700 fill-mode-forwards' : ''
+                      }`}
+                      style={{ animationDelay: `${index === currentIndex ? '0ms' : '100ms'}` }} 
+                      >
+                        <StudyMatchCard
+                          study={study}
+                          isActive={index === currentIndex}
+                          isSaved={savedItems.includes(study.id)}
+                          onSave={(e: any) => { e.stopPropagation(); handleSave(study.id); }}
+                          onClick={() => setSelectedStudy(study.id)}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
 
-      {/* Dots - Unter dem Carousel, über der Nav */}
-      <div className="h-6 shrink-0 flex items-center -mt-5 justify-center gap-2 z-10">
+      {/* Dots - Werden auch erst eingeblendet, wenn geladen */}
+      <div className={`h-6 shrink-0 flex items-center -mt-5 justify-center gap-2 z-10 transition-opacity duration-500 ${isImagesLoading ? 'opacity-0' : 'opacity-100'}`}>
         {studyMatches.map((_, index) => (
           <button
             key={index}

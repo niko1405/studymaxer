@@ -10,7 +10,7 @@ import useStudyMaxer from '../hooks/useStudyMaxer';
 const CardSkeleton = () => (
   <div className="w-full h-full bg-[#111e33] rounded-4xl border border-white/5 relative overflow-hidden flex flex-col p-6 sm:p-8 animate-pulse">
     {/* Background pulsing */}
-    <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-20" />
+    <div className="absolute inset-0 bg-linear-to-b from-white/5 to-transparent opacity-20" />
     
     {/* Header Skeleton */}
     <div className="flex justify-between items-start mb-4">

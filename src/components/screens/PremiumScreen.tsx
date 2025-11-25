@@ -21,7 +21,7 @@ const UpgradeScreen = ({ setCurrentView }: UpgradeScreenProps) => {
   };
 
   const baseTransition = "transition-all duration-700 ease-out";
-  const getAnimClass = (delay = 0) => 
+  const getAnimClass = (_ = 0) => 
     `${baseTransition} ${mounted ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'}`;
 
   return (

@@ -8,7 +8,7 @@ import useStudyMaxer from '../hooks/useStudyMaxer';
 // --- Skeleton Component ---
 const CardSkeleton = () => (
   <div className="w-full h-full bg-[#111e33] rounded-4xl border border-white/5 relative overflow-hidden flex flex-col p-6 sm:p-8 animate-pulse">
-    <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-20" />
+    <div className="absolute inset-0 bg-linear-to-b from-white/5 to-transparent opacity-20" />
     <div className="flex justify-between items-start mb-4">
       <div className="flex gap-4 items-center p-2 -ml-2 rounded-3xl bg-white/5 border border-white/5 w-32 h-16">
          <div className="w-12 h-12 rounded-2xl bg-white/10" />

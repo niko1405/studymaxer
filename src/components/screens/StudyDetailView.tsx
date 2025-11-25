@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ArrowLeft, GraduationCap, MapPin, BookOpen, Users, TrendingUp, Brain, Bookmark, BookmarkCheck } from 'lucide-react';
+import { user } from '../../config/mock';
 
 interface StudyDetailViewProps {
   study: {
@@ -141,7 +142,7 @@ export function StudyDetailView({ study, onBack, isSaved, onSave }: StudyDetailV
       <div className="px-6 py-12 max-w-4xl mx-auto">
         <div className="flex items-start gap-6 mb-8 animate-in slide-in-from-top duration-500">
           <div className={`w-20 h-20 rounded-2xl bg-linear-to-br flex items-center justify-center shadow-xl`}>
-            <Icon className="w-10 h-10 text-white" />
+            <Icon className="w-10 h-10" style={{ color: study.glowColor }} />
           </div>
           
           <div className="flex-1">
@@ -160,7 +161,7 @@ export function StudyDetailView({ study, onBack, isSaved, onSave }: StudyDetailV
 
         {/* A Day in the Life - Styled like the image */}
         <div className="mb-8 animate-in slide-in-from-bottom duration-500 delay-100">
-          <h2 className="mb-6 text-3xl">Here's what your day could look like, Alex!</h2>
+          <h2 className="mb-6 text-3xl">{`Here's what your day could look like, ${user.name.split(' ')[0]}!`}</h2>
           
           <div className="space-y-4">
             {dayInLife.map((item, index) => {

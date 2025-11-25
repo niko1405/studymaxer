@@ -97,6 +97,10 @@ export function PremiumScreen() {
   const { setShowNavigation } = useStudyMaxer();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentView]);
+
+  useEffect(() => {
     // Kurze Verzögerung für den Mount-Effekt, damit CSS-Transitions greifen
     const timer = setTimeout(() => setMounted(true), 50);
     return () => clearTimeout(timer);

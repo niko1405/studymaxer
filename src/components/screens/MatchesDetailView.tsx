@@ -3,7 +3,7 @@ import { getDayInLife, getRecommendations, getTasks, matches, quizQuestions } fr
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-export function MatchesDetailView() {
+function MatchesDetailView() {
   const [showQuiz, setShowQuiz] = useState(false);
   const [isSaved, setSaved] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -140,19 +140,19 @@ export function MatchesDetailView() {
       </div>
 
       {/* --- HERO SECTION --- */}
-      <div className="relative w-full h-[60vh] min-h-[500px] flex items-end">
+      <div className="relative w-full h-[60vh] min-h-[500px] flex items-end overflow-hidden">
         <div className="absolute inset-0 z-0">
           {/* Enhanced Image Handling for smoother feel */}
-          <div className={`absolute inset-0 bg-slate-900 transition-opacity duration-1000 ${mounted ? 'opacity-0' : 'opacity-100'}`} />
+          <div className={`absolute inset-0 bg-[#020617] transition-opacity duration-1000 z-10 ${mounted ? 'opacity-0' : 'opacity-100'}`} />
           <img 
             src={match.backgroundImage} 
             alt={match.title}
-            className={`w-full h-full object-cover transition-all duration-2000 ease-out ${mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
+            className={`w-full h-full object-cover transition-transform duration-2000 ease-out ${mounted ? 'scale-100' : 'scale-110'}`}
           />
-          <div className="absolute inset-0 bg-linear-to-b from-[#020617]/30 via-[#020617]/60 to-[#020617]" />
+          <div className="absolute inset-0 bg-linear-to-b from-[#020617]/30 via-[#020617]/60 to-[#020617] z-20" />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 pb-12 w-full">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 pb-24 w-full">
           <div className={`flex flex-wrap items-center gap-3 mb-6 ${getFadeUpClass()}`}>
              <div className="flex items-center gap-2 px-4 py-1.5 bg-emerald-500/20 border border-emerald-500/30 backdrop-blur-md rounded-full">
                <span className="relative flex h-2 w-2">
@@ -178,7 +178,7 @@ export function MatchesDetailView() {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 relative z-10 -mt-8">
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         
         {/* --- RECOMMENDATIONS (Dynamic Icons) --- */}
         <div className={`mb-20 ${getFadeUpClass()}`} style={{ transitionDelay: '200ms' }}>

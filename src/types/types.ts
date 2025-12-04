@@ -43,3 +43,16 @@ export interface StatsSlide extends BaseSlide {
 }
 
 export type Slide = HeroSlide | PartnersSlide | StatsSlide;
+
+export type InstitutionType = 'University' | 'University of Applied Sciences' | 'Company' | 'Vocational Training' | 'Other';
+
+export interface Institution {
+  id: string;
+  name: string;
+  type: InstitutionType;
+  location: string;
+  logo: string;
+  color: string;
+  tags: string[];
+  description: string;
+}

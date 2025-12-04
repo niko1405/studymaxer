@@ -4,6 +4,7 @@ import useStudyMaxer from './hooks/useStudyMaxer';
 import { OnboardingQuestions } from './screens/OnboardingQuestions';
 import GetStarted from './screens/GetStarted';
 import LoadingScreen from './screens/LoadingScreen';
+import Notification from './Notification';
 
 export function MainApp() {
   const { appState, setAppState } = useStudyMaxer();
@@ -26,6 +27,7 @@ export function MainApp() {
       </main>
 
       <Navigation />
+      <Notification />
     </div>
   );
 }

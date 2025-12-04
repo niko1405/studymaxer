@@ -8,6 +8,10 @@ interface StudyMaxerContextType {
     activeTab: ActiveTab;
     showNavigation: Boolean;
     setShowNavigation: SetState<Boolean>;
+    showNotification: Boolean;
+    setShowNotification: SetState<Boolean>;
+    currentHash: string;
+    currentPath: string;
 }
 
 export const StudyMaxerContext = createContext<StudyMaxerContextType | null>(null);
@@ -19,6 +23,7 @@ interface StudyMaxerProviderProps {
 export const StudyMaxerProvider = ({ children }: StudyMaxerProviderProps) => {
     const [appState, setAppState] = useState<AppState>('get-started');
     const [showNavigation, setShowNavigation] = useState<Boolean>(true);
+    const [showNotification, setShowNotification] = useState<Boolean>(true);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -28,16 +33,36 @@ export const StudyMaxerProvider = ({ children }: StudyMaxerProviderProps) => {
         ? currentPath as ActiveTab
         : 'home';
 
+    const [currentHash, setCurrentHash] = useState(location.hash);
+
     useLayoutEffect(() => {
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'instant'
-        });
+        if (currentHash !== '#matches' && currentHash !== '#explorer') {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'instant'
+            });
+        }
     }, [activeTab]);
 
     useEffect(() => {
-        if(appState == 'main') navigate('/home');
+        setCurrentHash(location.hash);
+    }, [location.hash]);
+
+    useEffect(() => {
+        switch (appState) {
+            case 'main':
+                navigate('/home#welcome');
+                break;
+            case 'get-started':
+                navigate('/');
+                break;
+            case 'onboarding':
+                navigate('/');
+                break;
+            default:
+                break;
+        }
     }, [appState]);
 
     // DATA OBJECT FOR CONTEXT
@@ -46,7 +71,11 @@ export const StudyMaxerProvider = ({ children }: StudyMaxerProviderProps) => {
         setAppState,
         activeTab,
         showNavigation,
-        setShowNavigation
+        setShowNavigation,
+        showNotification,
+        setShowNotification,
+        currentHash,
+        currentPath
     };
 
     return (

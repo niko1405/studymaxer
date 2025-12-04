@@ -324,7 +324,12 @@ export function PremiumScreen() {
 
   // DEFAULT FEATURES VIEW
   return (
-    <div className={`flex-1 overflow-y-auto pb-32 bg-[#0a1628] scroll-smooth`}>
+    <div className="min-h-screen bg-[#020617] text-white relative overflow-hidden pb-24">
+      
+      {/* --- Background Ambience --- */}
+      <div className="fixed top-0 left-0 w-full h-96 bg-blue-900/10 blur-[120px] pointer-events-none" />
+      <div className="fixed bottom-0 right-0 w-full h-96 bg-indigo-900/10 blur-[120px] pointer-events-none" />
+      <div className="fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[64px_64px] mask-[radial-gradient(ellipse_60%_60%_at_50%_50%,black,transparent)] pointer-events-none" />
       <div className="max-w-2xl mx-auto px-6 py-8">
 
         {/* Header Section */}

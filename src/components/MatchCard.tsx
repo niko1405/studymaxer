@@ -1,16 +1,16 @@
 import { Bookmark, BookmarkCheck } from 'lucide-react';
-import type { studyMatches } from '../config/mock';
+import type { matches } from '../config/mock';
 
-interface StudyMatchCardProps {
-  study: typeof studyMatches[0];
+interface MatchCardProps {
+  match: typeof matches[0];
   onClick: () => void;
   isSaved: boolean;
   onSave: (e: React.MouseEvent) => void;
   isActive: boolean;
 }
 
-const StudyMatchCard = ({ study, onClick, isSaved, onSave, isActive }: StudyMatchCardProps) => {
-  const Icon = study.icon;
+const MatchCard = ({ match, onClick, isSaved, onSave, isActive }: MatchCardProps) => {
+  const Icon = match.icon;
 
   return (
     <div
@@ -30,7 +30,7 @@ const StudyMatchCard = ({ study, onClick, isSaved, onSave, isActive }: StudyMatc
       {/* Background Image Layer */}
       <div className="absolute inset-0 z-0 select-none">
         <img
-          src={study.backgroundImage}
+          src={match.backgroundImage}
           alt=""
           className="w-full h-full object-cover opacity-30 transition-opacity duration-500"
           draggable="false"
@@ -47,7 +47,7 @@ const StudyMatchCard = ({ study, onClick, isSaved, onSave, isActive }: StudyMatc
         <div
           className="absolute w-[150%] h-[150%] opacity-20 blur-[100px]"
           style={{
-            background: `radial-gradient(circle, ${study.glowColor}, transparent 70%)`,
+            background: `radial-gradient(circle, ${match.glowColor}, transparent 70%)`,
           }}
         />
 
@@ -58,7 +58,7 @@ const StudyMatchCard = ({ study, onClick, isSaved, onSave, isActive }: StudyMatc
               key={i}
               className="absolute inset-0 rounded-full border-2 border-white/20"
               style={{
-                borderColor: study.glowColor,
+                borderColor: match.glowColor,
                 opacity: 0.3 - (i * 0.1), // Äußere Ringe transparenter
                 transform: `scale(${1 - i * 0.25})`, // Abstände zwischen Ringen
               }}
@@ -68,7 +68,7 @@ const StudyMatchCard = ({ study, onClick, isSaved, onSave, isActive }: StudyMatc
           {/* Inner Core Glow */}
           <div
             className="absolute w-32 h-32 rounded-full blur-3xl opacity-80"
-            style={{ background: study.glowColor }}
+            style={{ background: match.glowColor }}
           />
         </div>
       </div>
@@ -81,12 +81,12 @@ const StudyMatchCard = ({ study, onClick, isSaved, onSave, isActive }: StudyMatc
           <div className="flex gap-4 items-center p-2 -ml-2 rounded-3xl bg-black/20 backdrop-blur-md border border-white/5">
             <div className="w-12 h-12 rounded-2xl bg-[#0a1628] flex items-center justify-center border border-white/10 shadow-lg relative overflow-hidden group">
               <div className="absolute inset-0 opacity-20 bg-linear-to-br from-white to-transparent"></div>
-              <Icon className="w-6 h-6 relative z-10" style={{ color: isActive ? study.glowColor : '#9ca3af' }} />
+              <Icon className="w-6 h-6 relative z-10" style={{ color: isActive ? match.glowColor : '#9ca3af' }} />
             </div>
             <div className="flex flex-col pr-2">
               <span className="text-[10px] text-gray-300 font-bold uppercase tracking-widest mb-0.5 opacity-80">Match Score</span>
-              <span className="text-3xl font-black leading-none tracking-tight drop-shadow-md" style={{ color: isActive ? study.glowColor : 'gray', textShadow: `0 0 20px ${study.glowColor}40` }}>
-                {study.match}%
+              <span className="text-3xl font-black leading-none tracking-tight drop-shadow-md" style={{ color: isActive ? match.glowColor : 'gray', textShadow: `0 0 20px ${match.glowColor}40` }}>
+                {match.match}%
               </span>
             </div>
           </div>
@@ -99,10 +99,10 @@ const StudyMatchCard = ({ study, onClick, isSaved, onSave, isActive }: StudyMatc
         {/* Title & Type */}
         <div className="shrink-0 space-y-3 mt-2">
           <span className="inline-block px-3 py-1 bg-white/10 rounded-lg text-xs font-bold text-gray-200 border border-white/10 backdrop-blur-md shadow-sm">
-            {study.type}
+            {match.type}
           </span>
           <h2 className={`text-3xl sm:text-4xl font-bold leading-[1.1] tracking-tight transition-colors duration-300 drop-shadow-lg ${isActive ? 'text-white' : 'text-gray-600'}`}>
-            {study.title}
+            {match.title}
           </h2>
         </div>
 
@@ -112,10 +112,10 @@ const StudyMatchCard = ({ study, onClick, isSaved, onSave, isActive }: StudyMatc
         {/* Bottom Info */}
         <div className="mt-auto shrink-0 space-y-5">
           <p className="text-gray-300 text-sm sm:text-base leading-relaxed line-clamp-3 text-shadow-sm">
-            {study.description}
+            {match.description}
           </p>
           <div className="flex flex-wrap gap-2">
-            {study.careers.map((career: string) => (
+            {match.careers.map((career: string) => (
               <span key={career} className="px-3 py-1.5 bg-black/40 border border-white/10 rounded-lg text-xs text-gray-300 backdrop-blur-sm">
                 {career}
               </span>
@@ -130,4 +130,4 @@ const StudyMatchCard = ({ study, onClick, isSaved, onSave, isActive }: StudyMatc
   );
 };
 
-export default StudyMatchCard;
+export default MatchCard;

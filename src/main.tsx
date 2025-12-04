@@ -8,9 +8,10 @@ import "./index.css";
 
 
 import { MainApp } from "./components/MainApp.tsx";
-import HomeScreen from "./components/screens/HomeScreen.tsx";
+import HomeScreen from "./components/screens/HomeScreen/HomeScreen.tsx";
 import { PremiumScreen } from "./components/screens/PremiumScreen.tsx";
 import { ProfileScreen } from "./components/screens/ProfileScreen.tsx";
+import { MatchesDetailView } from "./components/screens/MatchesDetailView.tsx";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
           {
             path: "profile",
             element: <ProfileScreen />
+          },
+          {
+            path: "matches/:id",
+            element: <MatchesDetailView />
           },
         ]
       },

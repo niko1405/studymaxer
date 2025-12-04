@@ -1,6 +1,6 @@
-import { Code, Brain, Heart, Briefcase, Microscope, Palette, Hammer, Zap, Wrench, ChefHat, Beaker, GraduationCap, Building2, Award, Globe, Code2, Calculator, TrendingUp, UserIcon, Calendar, MessageSquare, Target } from 'lucide-react';
+import { Code, Brain, Heart, Briefcase, Microscope, Palette, Hammer, Zap, Wrench, ChefHat, Beaker, GraduationCap, Building2, Award, Globe, Code2, TrendingUp, UserIcon, Calendar, MessageSquare, Target, Trophy, Star, Building, Users, CheckCircle2, ClipboardList } from 'lucide-react';
 import { Leaf, Dumbbell, Music, BookOpen, Landmark } from 'lucide-react';
-import type { Slide } from '../types/types';
+import type { Institution, Slide } from '../types/types';
 
 export const studyMatchess = [
   {
@@ -100,18 +100,6 @@ export const studyMatchess = [
     backgroundImage: 'https://images.unsplash.com/photo-1614934273538-70f8ffc2e76e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiaW9sb2d5JTIwbGFib3JhdG9yeSUyMHNjaWVuY2V8ZW58MXx8fHwxNzYzMzk2MzIzfDA&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
-    id: 'chef',
-    title: 'Professional Chef',
-    type: 'Apprenticeship',
-    match: 73,
-    description: 'Train in culinary arts, food preparation, and kitchen management in professional environments.',
-    icon: ChefHat,
-    careers: ['#Chef', '#Pastry Chef', '#Restaurant Manager'],
-    gradient: 'from-rose-500/20 to-pink-500/20',
-    glowColor: 'rgba(244, 63, 94, 0.5)',
-    backgroundImage: 'https://images.unsplash.com/photo-1740727665746-cfe80ababc23?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGVmJTIwY29va2luZyUyMGtpdGNoZW58ZW58MXx8fHwxNzYzMzA1NTkwfDA&ixlib=rb-4.1.0&q=80&w=1080',
-  },
-  {
     id: 'design',
     title: 'Design',
     type: 'Study Program',
@@ -126,51 +114,73 @@ export const studyMatchess = [
 ];
 
 
-export const studyMatches = [
+export const matches = [
   {
-    id: '1',
+    id: 'computerscience',
     title: 'Computer Science',
     type: 'B.Sc.',
     match: 95,
-    description: 'A degree program focused on development, programming, and application of computer systems. Perfect for problem solvers.',
+    description: 'A degree program focused on development, programming, and application of computer systems. Perfect for problem solvers. Dive deep into algorithms, AI, and software engineering.',
     icon: Code2,
     careers: ['Software Dev', 'Data Scientist', 'Architect'],
     glowColor: '#3b82f6', // blue
     backgroundImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80',
   },
   {
-    id: '2',
+    id: 'porsche',
+    title: 'Porsche Engineering',
+    type: 'Company',
+    match: 67,
+    description: 'Shape the future of the sports car. Driven by dreams and precision. Work on cutting-edge automotive technologies in a highly innovative environment.',
+    backgroundImage: 'https://motionbgs.com/media/3959/porsche-gt3rs-in-rain.jpg', // Fallback image used as requested URL link was broken in context, reverted to high quality Unsplash car image
+    glowColor: '#ef4444',
+    icon: TrendingUp,
+    careers: ['Automotive Engineer', 'R&D Specialist', 'Simulation Engineer'],
+  },
+  {
+    id: 'design',
     title: 'Design',
     type: 'Study Program',
     match: 71,
-    description: 'Creative degree program for visual communication and design.',
+    description: 'Creative degree program for visual communication and design. Learn typography, color theory, and user experience principles.',
     icon: Palette,
     careers: ['#Designer', '#ArtDirector', '#UXDesigner'],
     glowColor: 'rgba(249, 115, 22, 0.5)',
     backgroundImage: 'https://images.unsplash.com/photo-1664520132859-727fc515fc8d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmFwaGljJTIwZGVzaWduJTIwY3JlYXRpdmV8ZW58MXx8fHwxNzYzMzc0Njk5fDA&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
-    id: '3',
-    title: 'Data Science',
-    type: 'M.Sc.',
-    match: 88,
-    description: 'Analyze complex data sets to drive decision making. Combines statistics, math, and computer science.',
-    icon: Calculator,
-    careers: ['Data Analyst', 'ML Engineer', 'Consultant'],
-    glowColor: '#8b5cf6',
-    backgroundImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80',
+    id: 'professionalchef',
+    title: 'Professional Chef',
+    type: 'Apprenticeship',
+    match: 73,
+    description: 'Train in culinary arts, food preparation, and kitchen management in professional environments. Master the art of taste.',
+    icon: ChefHat,
+    careers: ['#Chef', '#Pastry Chef', '#Restaurant Manager'],
+    glowColor: 'rgba(244, 63, 94, 0.5)',
+    backgroundImage: 'https://i.pinimg.com/originals/4b/fa/c2/4bfac2846c9c552d5b42d6798728a81f.jpg',
   },
   {
-    id: '4',
-    title: 'Biotechnology',
-    type: 'B.Sc.',
-    match: 82,
-    description: 'The intersection of biology and technology. Develop new products for medicine and agriculture.',
-    icon: Microscope,
-    careers: ['Lab Researcher', 'Biotech Engineer'],
-    glowColor: '#10b981', // emerald
-    backgroundImage: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80',
-  }
+    id: 'sap',
+    title: 'SAP Dual Study',
+    type: 'Company',
+    match: 95,
+    description: 'Combine theory and practice with the global leader in enterprise software. Earn a salary while studying and gain invaluable real-world experience from day one.',
+    backgroundImage: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000&auto=format&fit=crop',
+    glowColor: '#3b82f6',
+    icon: Briefcase,
+    careers: ['Consultant', 'Full Stack Developer', 'Product Manager'],
+  },
+  {
+    id: 'automechanic',
+    title: 'Automotive Mechanic',
+    type: 'Apprenticeship',
+    match: 80,
+    description: 'Specialize in diagnosing, maintaining, and repairing vehicles and automotive systems. Get hands-on with engines and electronics.',
+    icon: Wrench,
+    careers: ['#Mechanic', '#Automotive Technician', '#Service Manager'],
+    glowColor: '#f97316', // Orange fallback for empty string
+    backgroundImage: 'https://images.unsplash.com/photo-1698998882494-57c3e043f340?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWNoYW5pYyUyMGF1dG9tb3RpdmUlMjByZXBhaXJ8ZW58MXx8fHwxNzYzMzk2MzI0fDA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
 ];
 
 
@@ -496,3 +506,269 @@ export const mockChats: Record<string, Array<{ sender: 'user' | 'mentor'; messag
     { sender: 'mentor', message: 'Craftsmanship is an art', time: '13:01' },
   ],
 };
+
+export const institutions: Institution[] = [
+  // Universities & UAS
+  {
+    id: 'hka',
+    name: 'Hochschule Karlsruhe (HKA)',
+    type: 'University of Applied Sciences',
+    location: 'Karlsruhe, BW',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Hochschule_Karlsruhe_Logo.svg/1200px-Hochschule_Karlsruhe_Logo.svg.png',
+    color: '#ef4444',
+    tags: ['Technologie', 'Informatik', 'Ingenieurwesen', 'Top Rank'],
+    description: 'Die HKA bietet hohe Praxisrelevanz und enge Kooperation mit der Industrie.',
+  },
+  {
+    id: 'kit',
+    name: 'Karlsruher Institut für Technologie (KIT)',
+    type: 'University',
+    location: 'Karlsruhe, BW',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Logo_KIT.svg/1200px-Logo_KIT.svg.png',
+    color: '#059669',
+    tags: ['Forschung', 'Elite Uni', 'Physik', 'Informatik'],
+    description: 'Eine der größten Forschungs- und Lehreinrichtungen in Deutschland.',
+  },
+  {
+    id: 'dhbw',
+    name: 'DHBW Mannheim',
+    type: 'University of Applied Sciences',
+    location: 'Mannheim, BW',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/DHBW-Logo.svg/1200px-DHBW-Logo.svg.png',
+    color: '#e11d48',
+    tags: ['Duales System', 'Wirtschaft', 'Soziales', 'Technik'],
+    description: 'Studieren und gleichzeitig Berufserfahrung sammeln.',
+  },
+  {
+    id: 'tum',
+    name: 'TU München',
+    type: 'University',
+    location: 'München, BY',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/TUM_Logo_blau_auf_weiss.svg/1200px-TUM_Logo_blau_auf_weiss.svg.png',
+    color: '#0ea5e9',
+    tags: ['Exzellenz', 'Innovation', 'Startups'],
+    description: 'Die unternehmerische Universität.',
+  },
+  // Companies
+  {
+    id: 'sap',
+    name: 'SAP SE',
+    type: 'Company',
+    location: 'Walldorf, BW',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/2560px-SAP_2011_logo.svg.png',
+    color: '#3b82f6',
+    tags: ['Duales Studium', 'Software', 'Global Player', 'Business'],
+    description: 'Marktführer für Unternehmenssoftware.',
+  },
+  {
+    id: 'porsche',
+    name: 'Porsche AG',
+    type: 'Company',
+    location: 'Stuttgart, BW',
+    logo: 'https://upload.wikimedia.org/wikipedia/de/thumb/2/2d/Porsche_Wappen.svg/1200px-Porsche_Wappen.svg.png',
+    color: '#b91c1c',
+    tags: ['Automotive', 'Luxus', 'Ingenieurwesen', 'Duales Studium'],
+    description: 'Gestalte die Zukunft des Sportwagens.',
+  },
+  {
+    id: 'dm',
+    name: 'dm-drogerie markt',
+    type: 'Company',
+    location: 'Karlsruhe, BW',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Dm_Logo.svg/2560px-Dm_Logo.svg.png',
+    color: '#fbbf24', // yellow-ish
+    tags: ['Handel', 'Ausbildung', 'IT', 'Nachhaltigkeit'],
+    description: 'Hier bin ich Mensch, hier kauf ich ein. Und arbeite an spannenden IT-Projekten.',
+  },
+  // Vocational / Other
+  {
+    id: 'ihk',
+    name: 'IHK Karlsruhe',
+    type: 'Other',
+    location: 'Karlsruhe, BW',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/IHK-Logo.svg/1200px-IHK-Logo.svg.png',
+    color: '#f97316', // orange
+    tags: ['Beratung', 'Weiterbildung', 'Netzwerk'],
+    description: 'Partner der Wirtschaft für Ausbildung und Weiterbildung.',
+  },
+  {
+    id: 'fraunhofer',
+    name: 'Fraunhofer IOSB',
+    type: 'Other',
+    location: 'Karlsruhe, BW',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Fraunhofer-Gesellschaft_2009_logo.svg/1200px-Fraunhofer-Gesellschaft_2009_logo.svg.png',
+    color: '#14b8a6', // teal
+    tags: ['Forschung', 'Robotik', 'Künstliche Intelligenz'],
+    description: 'Forschung für die Praxis. Entdecke Innovationen von morgen.',
+  },
+  {
+    id: 'code',
+    name: '42 Heilbronn',
+    type: 'Vocational Training',
+    location: 'Heilbronn, BW',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/42_Logo.svg/1200px-42_Logo.svg.png',
+    color: '#000000',
+    tags: ['Coding School', 'Kostenlos', 'Peer-to-Peer'],
+    description: 'Die revolutionäre Coding School ohne Lehrer und ohne Bücher.',
+  }
+];
+
+export const institutionDetailData = {
+  // Different content based on type
+  universityPrograms: [
+    { title: 'Informatik (B.Sc.)', duration: '7 Semester', type: 'Bachelor' },
+    { title: 'Wirtschaftsinformatik (B.Sc.)', duration: '7 Semester', type: 'Bachelor' },
+    { title: 'Artificial Intelligence (M.Sc.)', duration: '3 Semester', type: 'Master' },
+    { title: 'Medieninformatik (B.A.)', duration: '6 Semester', type: 'Bachelor' },
+  ],
+  companyOpportunities: [
+    { title: 'Duales Studium Wirtschaftsinformatik', duration: '3 Jahre', type: 'DHBW' },
+    { title: 'Ausbildung Fachinformatiker Anwendungsentwicklung', duration: '3 Jahre', type: 'IHK' },
+    { title: 'Werkstudent Frontend Dev', duration: 'Flexibel', type: 'Teilzeit' },
+    { title: 'Trainee Programm Management', duration: '18 Monate', type: 'Vollzeit' },
+  ],
+  handbooks: [
+    { title: 'Modulhandbuch / Infomaterial', size: '2.4 MB', date: 'Okt 2024' },
+    { title: 'Prüfungsordnung / Verträge', size: '1.1 MB', date: 'Sep 2023' },
+    { title: 'Campus / Standort Plan', size: '5.6 MB', date: 'Jan 2025' },
+  ],
+  contacts: [
+    { name: 'Dr. Sarah Connor', role: 'Ansprechpartnerin', image: 'https://i.pravatar.cc/150?u=a042581f4e29026024d' },
+    { name: 'Lukas Meyer', role: 'HR / Student', image: 'https://i.pravatar.cc/150?u=a042581f4e29026704d' },
+    { name: 'Julia Weber', role: 'Alumni @ Google', image: 'https://i.pravatar.cc/150?u=a04258a2462d826712d' },
+  ]
+};
+
+export const dayInLife = [
+  { time: '09:00 - 10:30', activity: 'Lecture: Intro to AI', description: 'Dive into the fundamentals of Artificial Intelligence and machine learning concepts.' },
+  { time: '11:00 - 12:30', activity: 'Coding Session', description: 'Apply what you\'ve learned in a hands-on programming exercise. Today: Python basics.' },
+  { time: '13:00 - 14:00', activity: 'Lunch at the Mensa', description: 'Recharge and socialize with fellow students over a healthy meal.' },
+  { time: '14:00 - 16:00', activity: 'Teamwork on App Prototype', description: 'Collaborate with your group on the semester project. Brainstorming and wireframing.' },
+  { time: '16:00 - 17:30', activity: 'Library Research', description: 'Independent study time for research for your upcoming essay on ethics in AI.' },
+  { time: '18:00 - 19:00', activity: 'University Sports', description: 'Unwind and stay active with your favorite campus sports team.' },
+];
+
+export const colleges = [
+  { name: 'MIT', location: 'Cambridge, MA', rank: '#1 Worldwide' },
+  { name: 'Stanford University', location: 'Stanford, CA', rank: '#2 Worldwide' },
+  { name: 'ETH Zurich', location: 'Zurich, Switzerland', rank: '#1 Europe' },
+  { name: 'Technical University Munich', location: 'Munich, Germany', rank: 'Top 50' },
+];
+
+export const trainingInstitutions = [
+  { name: 'Johnson & Sons Carpentry', location: 'Munich, Germany', rank: 'Master Training' },
+  { name: 'Handwerk Excellence Center', location: 'Berlin, Germany', rank: 'Award-Winning' },
+  { name: 'Traditional Crafts Guild', location: 'Hamburg, Germany', rank: 'Certified' },
+];
+
+export const getDayInLife = (type: string, title: string) => {
+  if (type === 'Company' || title.includes('SAP') || title.includes('Porsche')) {
+    return [
+      { time: '09:00', activity: 'Team Standup', description: 'Align with your squad on daily goals and blockers.', icon: Users, color: 'from-blue-500 to-indigo-500' },
+      { time: '10:00', activity: 'Deep Work / Focus', description: 'Programming, CAD design, or strategic planning blocks.', icon: Brain, color: 'from-purple-500 to-pink-500' },
+      { time: '12:30', activity: 'Business Lunch', description: 'Networking with colleagues at the campus canteen.', icon: Users, color: 'from-orange-500 to-red-500' },
+      { time: '14:00', activity: 'Client/Stakeholder Meeting', description: 'Presenting progress and gathering requirements.', icon: TrendingUp, color: 'from-green-500 to-emerald-500' },
+      { time: '16:00', activity: 'Skill Development', description: 'Internal workshops or learning new tech stacks.', icon: BookOpen, color: 'from-teal-500 to-cyan-500' },
+    ];
+  } else if (type === 'Apprenticeship' || title.includes('Chef') || title.includes('Mechanic')) {
+    return [
+      { time: '07:30', activity: 'Shift Start & Prep', description: 'Preparing tools, mise-en-place, or checking equipment.', icon: ClipboardList, color: 'from-orange-500 to-amber-500' },
+      { time: '09:00', activity: 'Practical Work', description: 'Hands-on tasks: Cooking service or vehicle diagnostics.', icon: Wrench, color: 'from-blue-500 to-cyan-500' },
+      { time: '12:00', activity: 'Team Break', description: 'Short break with the crew.', icon: Users, color: 'from-green-500 to-emerald-500' },
+      { time: '13:00', activity: 'Vocational School', description: 'Theoretical block: Learning the science behind the craft.', icon: BookOpen, color: 'from-indigo-500 to-purple-500' },
+      { time: '16:00', activity: 'Clean Up & Review', description: 'Ensuring workspace safety and reviewing daily progress.', icon: CheckCircle2, color: 'from-slate-500 to-slate-400' },
+    ];
+  } else {
+    // Default: Study
+    return [
+      { time: '09:00', activity: 'Morning Lecture', description: 'Theoretical foundations in large auditoriums.', icon: GraduationCap, color: 'from-blue-500 to-cyan-500' },
+      { time: '11:00', activity: 'Lab / Tutorial', description: 'Applying theory in small groups.', icon: Users, color: 'from-purple-500 to-pink-500' },
+      { time: '13:00', activity: 'Mensa Lunch', description: 'Socializing with fellow students.', icon: Users, color: 'from-orange-500 to-amber-500' },
+      { time: '14:30', activity: 'Library Session', description: 'Independent study and research.', icon: BookOpen, color: 'from-teal-500 to-emerald-500' },
+      { time: '17:00', activity: 'Campus Sports', description: 'Unwinding with university sports clubs.', icon: TrendingUp, color: 'from-rose-500 to-red-500' },
+    ];
+  }
+};
+
+export const getTasks = (id: string) => {
+  switch (id) {
+    case 'porsche':
+      return [
+        { title: 'Aerodynamics Analysis', desc: 'Review wind tunnel data for the new GT3 wing.', difficulty: 'Hard' },
+        { title: 'Battery Simulation', desc: 'Run thermal efficiency tests for EV prototypes.', difficulty: 'Medium' },
+        { title: 'Track Day Prep', desc: 'Prepare telemetry systems for Nürburgring tests.', difficulty: 'Easy' }
+      ];
+    case 'computerscience':
+      return [
+        { title: 'Debug Algorithm', desc: 'Find the logic error in a sorting function.', difficulty: 'Medium' },
+        { title: 'Database Design', desc: 'Sketch an ER-Model for a social app.', difficulty: 'Hard' },
+        { title: 'Code Review', desc: 'Review a peer\'s pull request on GitHub.', difficulty: 'Easy' }
+      ];
+    case 'design':
+      return [
+        { title: 'Logo Sketching', desc: 'Draft 3 concepts for a sustainable brand.', difficulty: 'Medium' },
+        { title: 'Color Palette', desc: 'Create a moodboard with accessible contrast.', difficulty: 'Easy' },
+        { title: 'UI Prototyping', desc: 'Build a clickable wireframe in Figma.', difficulty: 'Hard' }
+      ];
+    case 'professionalchef':
+      return [
+        { title: 'Mise en Place', desc: 'Chop vegetables for the dinner service.', difficulty: 'Easy' },
+        { title: 'Sauce Reduction', desc: 'Monitor and season the demi-glace.', difficulty: 'Medium' },
+        { title: 'Plating Design', desc: 'Arrange the main course for visual appeal.', difficulty: 'Hard' }
+      ];
+    case 'automechanic':
+      return [
+        { title: 'Oil Change', desc: 'Perform standard maintenance on a sedan.', difficulty: 'Easy' },
+        { title: 'Engine Diagnostics', desc: 'Use OBD-II scanner to identify fault codes.', difficulty: 'Medium' },
+        { title: 'Brake System', desc: 'Replace pads and bleed hydraulic lines.', difficulty: 'Hard' }
+      ];
+    default:
+      return [
+        { title: 'Research Topic', desc: 'Find 3 sources for your thesis.', difficulty: 'Easy' },
+        { title: 'Group Project', desc: 'Coordinate tasks with your semester team.', difficulty: 'Medium' },
+        { title: 'Exam Prep', desc: 'Summarize chapter 4 for the finals.', difficulty: 'Hard' }
+      ];
+  }
+};
+
+export const getRecommendations = (type: string, id: string) => {
+  if (id === 'porsche') {
+    return [
+      { name: 'Weissach Center', label: 'R&D HQ', icon: Brain },
+      { name: 'Zuffenhausen', label: 'Production', icon: Wrench },
+      { name: 'Digital Lab Berlin', label: 'Innovation', icon: Code2 },
+      { name: 'Leipzig Plant', label: 'Manufacturing', icon: Building },
+    ];
+  }
+  if (id === 'sap') {
+    return [
+      { name: 'Walldorf HQ', label: 'Global HQ', icon: Building },
+      { name: 'SAP Labs Palo Alto', label: 'Innovation', icon: Code2 },
+      { name: 'AppHaus', label: 'Design Thinking', icon: Palette },
+      { name: 'SAP Bangalore', label: 'Major Hub', icon: Users },
+    ];
+  }
+
+  if (type === 'Apprenticeship' || id === 'professionalchef') {
+    return [
+      { name: 'IHK Chamber', label: 'Certification', icon:  CheckCircle2 },
+      { name: 'Vocational School', label: 'Theory Partner', icon: BookOpen },
+      { name: 'Partner Hotels', label: 'Rotations', icon: Building },
+      { name: 'Guild Network', label: 'Community', icon: Users },
+    ];
+  }
+  
+  // Default Study
+  return [
+    { name: 'MIT', label: '#1 Worldwide', icon: Trophy },
+    { name: 'TU Munich', label: 'Excellence Cluster', icon: Star },
+    { name: 'Stanford', label: 'Innovation Hub', icon: Brain },
+    { name: 'ETH Zurich', label: 'Top in Europe', icon: TrendingUp },
+  ];
+};
+
+export const quizQuestions = [
+  { question: 'Do you enjoy solving complex problems?', type: 'rating' },
+  { question: 'How comfortable are you with mathematics?', type: 'rating' },
+  { question: 'Do you prefer working alone or in teams?', type: 'choice' },
+];

@@ -1,5 +1,4 @@
 import { createContext, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 
 type HomeSection = 'welcome' | 'matches' | 'explorer';
 
@@ -15,8 +14,6 @@ export const HomeScreenContext = createContext<HomeScreenContextType | null>(nul
 const HomeScreenProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const matchesRef = useRef<HTMLElement | null>(null);
     const explorerRef = useRef<HTMLElement | null>(null);
-
-    const navigate = useNavigate();
 
     const scrollTo = (section: HomeSection, behavior: ScrollBehavior = 'smooth') => {
         if (section === 'matches') {

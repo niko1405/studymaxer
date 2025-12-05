@@ -1,109 +1,11 @@
 import { Building2, MapPin, Search, GraduationCap, Briefcase, Globe, Code, ArrowRight } from "lucide-react";
 import { forwardRef, useState, useMemo, useEffect, useRef } from "react";
+import { colleges, companies, vocationalInstitutions } from "../../../config/mock";
+import type { Institution, InstitutionType } from "../../../types/types";
+import { useNavigate } from "react-router-dom";
 
-// --- Types ---
-type InstitutionType = 'University' | 'University of Applied Sciences' | 'Company' | 'Vocational Training' | 'Other';
 
-interface Institution {
-  id: string;
-  name: string;
-  type: InstitutionType;
-  location: string;
-  logo: string; // URL
-  tags: string[];
-  description: string;
-  website?: string;
-}
-
-// --- Mock Data (Translated & Updated) ---
-export const institutions: Institution[] = [
-  // Universities
-  {
-    id: 'hka',
-    name: 'Karlsruhe University of Applied Sciences (HKA)',
-    type: 'University of Applied Sciences',
-    location: 'Karlsruhe, DE',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Hochschule_Karlsruhe_Logo.svg/1200px-Hochschule_Karlsruhe_Logo.svg.png',
-    tags: ['Technology', 'Computer Science', 'Engineering', 'Top Rank'],
-    description: 'HKA offers high practical relevance and close cooperation with the industry.',
-  },
-  {
-    id: 'kit',
-    name: 'Karlsruhe Institute of Technology (KIT)',
-    type: 'University',
-    location: 'Karlsruhe, DE',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Logo_KIT.svg/1200px-Logo_KIT.svg.png',
-    tags: ['Research', 'Elite University', 'Physics', 'Informatics'],
-    description: 'One of the largest research and teaching institutions in Germany.',
-  },
-  {
-    id: 'tum',
-    name: 'Technical University of Munich (TUM)',
-    type: 'University',
-    location: 'Munich, DE',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/TUM_Logo_blau_auf_weiss.svg/1200px-TUM_Logo_blau_auf_weiss.svg.png',
-    tags: ['Excellence', 'Innovation', 'Startups', 'Global'],
-    description: 'The Entrepreneurial University. Fostering talent and innovation.',
-  },
-  // Companies
-  {
-    id: 'sap',
-    name: 'SAP SE',
-    type: 'Company',
-    location: 'Walldorf, DE',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/2560px-SAP_2011_logo.svg.png',
-    tags: ['Dual Study', 'Software', 'Global Player', 'Business'],
-    description: 'Market leader for enterprise software. Powering businesses globally.',
-  },
-  {
-    id: 'porsche',
-    name: 'Porsche AG',
-    type: 'Company',
-    location: 'Stuttgart, DE',
-    logo: 'https://upload.wikimedia.org/wikipedia/de/thumb/2/2d/Porsche_Wappen.svg/1200px-Porsche_Wappen.svg.png',
-    tags: ['Automotive', 'Luxury', 'Engineering', 'Dual Study'],
-    description: 'Shape the future of the sports car. Driven by dreams.',
-  },
-  {
-    id: 'nvidia',
-    name: 'NVIDIA Germany',
-    type: 'Company',
-    location: 'Munich/Berlin, DE',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Nvidia_logo.svg/2560px-Nvidia_logo.svg.png',
-    tags: ['AI', 'Hardware', 'Deep Learning', 'Gaming'],
-    description: 'Pioneers of accelerated computing and artificial intelligence.',
-  },
-  // Vocational / Other
-  {
-    id: '42',
-    name: '42 Heilbronn',
-    type: 'Vocational Training',
-    location: 'Heilbronn, DE',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/42_Logo.svg/1200px-42_Logo.svg.png',
-    tags: ['Coding School', 'Free', 'Peer-to-Peer', 'JavaScript'],
-    description: 'The revolutionary coding school without teachers or books.',
-  },
-  {
-    id: 'fraunhofer',
-    name: 'Fraunhofer IOSB',
-    type: 'Other',
-    location: 'Karlsruhe, DE',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Fraunhofer-Gesellschaft_2009_logo.svg/1200px-Fraunhofer-Gesellschaft_2009_logo.svg.png',
-    tags: ['Research', 'Robotics', 'Artificial Intelligence'],
-    description: 'Research for practice. Discover innovations of tomorrow.',
-  },
-  {
-    id: 'ihk',
-    name: 'IHK Karlsruhe',
-    type: 'Other',
-    location: 'Karlsruhe, DE',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/IHK-Logo.svg/1200px-IHK-Logo.svg.png',
-    tags: ['Consulting', 'Education', 'Networking'],
-    description: 'Partner of the economy for training and further education.',
-  }
-];
-
-// --- Helpers ---
+const institutions = [...colleges, ...companies, ...vocationalInstitutions];
 
 // Logic to determine visual theme based on category
 const getThemeByType = (type: InstitutionType) => {
@@ -148,6 +50,8 @@ const ExplorerSection = forwardRef<HTMLElement>((_, ref) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
   const [imgError, setImgError] = useState<Record<string, boolean>>({});
+
+  const navigate = useNavigate();
   
   // State for scroll-triggered animation
   const [isVisible, setIsVisible] = useState(false);
@@ -162,7 +66,11 @@ const ExplorerSection = forwardRef<HTMLElement>((_, ref) => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
+      ([entry]) => {
+        if(entry.isIntersecting) 
+          window.location.hash = "#explorer";
+        setIsVisible(entry.isIntersecting)
+      }, 
       { threshold: 0.1 } // Reduced threshold slightly for better responsiveness
     );
 
@@ -191,7 +99,7 @@ const ExplorerSection = forwardRef<HTMLElement>((_, ref) => {
   }, [searchQuery, activeFilter]);
 
   const handleSelect = (inst: Institution) => {
-    console.log(`Selected: ${inst.name}`);
+    navigate(`/institutions/${inst.id}`);
   };
 
   const handleImageError = (id: string) => {

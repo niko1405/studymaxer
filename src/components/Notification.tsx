@@ -83,7 +83,7 @@ export default function Notification() {
   }, []);
 
   useEffect(() => {
-    if (currentPath.includes('matches'))
+    if (currentPath.includes('matches') || currentPath.includes('institutions'))
       setShowNotification(false);
     else
       !showNotification && setShowNotification(true);

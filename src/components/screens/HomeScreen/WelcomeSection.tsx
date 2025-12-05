@@ -1,7 +1,7 @@
 import { useState, forwardRef, useRef, useEffect } from 'react';
 import { ArrowDown, CheckCircle2, RotateCcw } from 'lucide-react';
-import useHomeScreen from '../../hooks/useHomeScreen';
 import useStudyMaxer from '../../hooks/useStudyMaxer';
+import { useNavigate } from 'react-router-dom';
 
 interface TypewriterTextProps {
   text: string;
@@ -12,7 +12,7 @@ interface TypewriterTextProps {
 
 const TypewriterText: React.FC<TypewriterTextProps> = ({ text, speed = 50, delay = 0, start = true }) => {
   const [displayedText, setDisplayedText] = useState<string>('');
-  
+
   useEffect(() => {
     if (!start) {
       setDisplayedText('');
@@ -59,7 +59,7 @@ const DrawingAnimation = ({ start }: { start: boolean }) => (
           <stop offset="100%" stopColor="rgba(255,255,255,0)" />
         </linearGradient>
       </defs>
-      
+
       {/* Eine abstrakte, pfadartige Linie, die "den Weg" symbolisiert */}
       <path
         d="M -100,450 C 100,450 200,800 400,600 C 600,400 500,200 800,300 C 1100,400 1200,100 1600,200"
@@ -70,7 +70,7 @@ const DrawingAnimation = ({ start }: { start: boolean }) => (
         filter="url(#glow)"
         className={`transition-all duration-3000 ease-out ${start ? 'draw-active' : 'draw-reset'}`}
       />
-      
+
       {/* Zweite, dünnere Linie für Tiefe */}
       <path
         d="M -50,550 C 150,550 250,700 450,650 C 650,600 550,300 850,350 C 1150,400 1300,600 1600,500"
@@ -85,7 +85,7 @@ const DrawingAnimation = ({ start }: { start: boolean }) => (
 
 
 const WelcomeSection = forwardRef<HTMLElement>((_, ref) => {
-  const { scrollTo } = useHomeScreen();
+  const navigate = useNavigate();
   const { setAppState } = useStudyMaxer();
 
   const [isVisible, setIsVisible] = useState(false);
@@ -99,7 +99,9 @@ const WelcomeSection = forwardRef<HTMLElement>((_, ref) => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting)
+      },
       { threshold: 0.1 }
     );
     if (internalRef.current) observer.observe(internalRef.current);
@@ -114,7 +116,7 @@ const WelcomeSection = forwardRef<HTMLElement>((_, ref) => {
   const handleRestartOnboarding = () => setAppState('onboarding');
 
   // Animation Utilities
-  const fadeUpClass = (delay: string = '0') => 
+  const fadeUpClass = (delay: string = '0') =>
     `transition-all duration-1000 delay-${delay} ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`;
 
   return (
@@ -135,10 +137,10 @@ const WelcomeSection = forwardRef<HTMLElement>((_, ref) => {
       `}</style>
 
       {/* --- Background Elements --- */}
-      
+
       {/* 1. Subtle Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[100px_100px] mask-[radial-gradient(ellipse_60%_60%_at_50%_50%,black,transparent)]"></div>
-      
+
       {/* 2. Ambient Glow Spots */}
       <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px]" />
       <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px]" />
@@ -151,7 +153,7 @@ const WelcomeSection = forwardRef<HTMLElement>((_, ref) => {
       <div className="relative z-10 w-full max-w-5xl px-6 flex flex-col items-center text-center">
 
         {/* 1. Status Badge */}
-        <div 
+        <div
           className={`mb-8 flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium tracking-wide backdrop-blur-sm ${fadeUpClass()}`}
         >
           <CheckCircle2 className="w-4 h-4" />
@@ -160,14 +162,14 @@ const WelcomeSection = forwardRef<HTMLElement>((_, ref) => {
 
         {/* 2. Headlines */}
         <div className="mb-10 space-y-4">
-          <h1 
+          <h1
             className={`text-6xl md:text-8xl font-bold tracking-tight text-white ${fadeUpClass('100')}`}
             style={{ transitionDelay: '100ms' }}
           >
             Welcome to <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-indigo-400 to-sky-400">StudyMaxer</span>
           </h1>
-          
-          <div 
+
+          <div
             className={`h-12 flex items-center justify-center text-xl md:text-2xl text-slate-400 font-light ${fadeUpClass('200')}`}
             style={{ transitionDelay: '200ms' }}
           >
@@ -175,19 +177,19 @@ const WelcomeSection = forwardRef<HTMLElement>((_, ref) => {
               text="Your path to the perfect career match."
               speed={40}
               delay={800}
-              start={isVisible} 
+              start={isVisible}
             />
           </div>
         </div>
 
         {/* 3. Actions */}
-        <div 
+        <div
           className={`flex flex-col sm:flex-row items-center gap-5 w-full justify-center ${fadeUpClass('400')}`}
           style={{ transitionDelay: '400ms' }}
         >
           {/* Primary CTA */}
           <button
-            onClick={() => scrollTo('matches')}
+            onClick={() => navigate('/home#matches', { state: { tick: Date.now() } })}
             className="group relative min-w-[200px] px-8 py-4 bg-white text-slate-900 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] flex items-center justify-center gap-2 overflow-hidden"
           >
             <span>See Results</span>
@@ -207,8 +209,8 @@ const WelcomeSection = forwardRef<HTMLElement>((_, ref) => {
       </div>
 
       {/* --- Scroll Indicator --- */}
-      <div 
-        onClick={() => scrollTo('matches')}
+      <div
+        onClick={() => navigate('/home#matches', { state: { tick: Date.now() } })}
         className={`absolute bottom-30 left-1/2 -translate-x-1/2 cursor-pointer transition-all duration-1000 delay-1000 hover:opacity-100 hover:translate-y-1 ${isVisible ? 'opacity-40 translate-y-0' : 'opacity-0 -translate-y-4'}`}
       >
         <div className="flex flex-col items-center gap-3">

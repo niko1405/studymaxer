@@ -12,7 +12,7 @@ const Navigation = () => {
   }
 
   useEffect(() => {
-    if(currentPath.includes('matches'))
+    if(currentPath.includes('matches') || currentPath.includes('institutions'))
       setShowNavigation(false);
     else
       !showNavigation && setShowNavigation(true);

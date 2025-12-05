@@ -51,8 +51,9 @@ export interface Institution {
   name: string;
   type: InstitutionType;
   location: string;
-  logo: string;
-  color: string;
+  logo: string; // URL
   tags: string[];
   description: string;
+  background: string;
+  website?: string;
 }
